@@ -209,20 +209,20 @@
     <div id="login-modal">
         <div class="login-card">
             <h2 style="color: var(--primary); margin-bottom: 10px;">Bienvenido</h2>
-            <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 25px;">Accede a tu bóveda financiera personal.</p>
-            <input type="text" value="Servidor: Local (Offline)" disabled style="opacity: 0.7; background: rgba(0,0,0,0.03); font-weight: bold; text-align: center;">
+            <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 25px;">Accede a tu bóveda financiera personal</p>
+            <input type="text" value="Servidor: SERVTOHKA4" disabled style="opacity: 0.7; background: rgba(0,0,0,0.03); font-weight: bold; text-align: center;">
             <input type="text" id="login-user" placeholder="Usuario" onkeypress="if(event.key === 'Enter') iniciarSesion()">
             <input type="password" id="login-pass" placeholder="Contraseña" onkeypress="if(event.key === 'Enter') iniciarSesion()">
-            <label style="display:block; margin-bottom: 8px; text-align: left; font-size: 13px; font-weight: 600; color: var(--text-muted);">Archivo de Bóveda (.json):</label>
+            <label style="display:block; margin-bottom: 8px; text-align: left; font-size: 13px; font-weight: 600; color: var(--text-muted);">Bóveda (.json):</label>
             <div class="custom-file-container" style="margin-bottom: 20px;">
                 <label for="login-file" class="custom-file-btn">Seleccionar archivo</label>
                 <span id="login-file-name" class="file-name-display">Ningún archivo seleccionado</span>
                 <input type="file" id="login-file" accept=".json" onchange="actualizarNombreArchivo(this, 'login-file-name')">
             </div>
-            <button onclick="iniciarSesion()" style="width: 100%; margin-bottom: 15px;">Abrir Bóveda</button>
+            <button onclick="iniciarSesion()" style="width: 100%; margin-bottom: 15px;">Autenticar</button>
             <div style="border-top: 1px solid var(--border); padding-top: 15px;">
                 <span style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 8px;">¿Eres un usuario nuevo?</span>
-                <button onclick="abrirModalCrearBoveda()" class="btn-secondary" style="width: 100%;">Crear Nueva Cuenta (Generar Bóveda)</button>
+                <button onclick="abrirModalCrearBoveda()" class="btn-secondary" style="width: 100%;">Generar Bóveda</button>
             </div>
         </div>
     </div>
@@ -885,4 +885,5 @@
         function exportarCSV() { const fechaHoy = new Date().toLocaleDateString('es-ES'); let csv = `"HISTORIAL FINANCIERO - Generado el ${fechaHoy}"\n`; csv += "Fecha,Tipo de Movimiento,Detalle / Descripción,Monto ($), Saldo Post-Movimiento ($)\n"; misDatos.datos.transacciones.forEach(tx => { csv += `"${tx.fecha}","${tx.tipo}","${tx.detalle}","${tx.monto.toFixed(2)}","${(tx.saldo_historico || 0).toFixed(2)}"\n`; }); const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' }); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `Historial_Financiero_${new Date().toISOString().split('T')[0]}.csv`; a.click(); }
     </script>
 </body>
+
 </html>
