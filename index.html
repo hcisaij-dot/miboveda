@@ -112,9 +112,11 @@
         .leyenda-color-txt { display: flex; align-items: center; }
         .color-dot { width: 12px; height: 12px; border-radius: 50%; margin-right: 8px; }
 
+        /* NUEVO: CAJA DE ANÁLISIS */
         .analisis-box { background: rgba(24, 119, 242, 0.05); border-left: 4px solid var(--primary); padding: 15px; margin-top: 20px; border-radius: 8px; font-size: 13px; color: var(--text-main); line-height: 1.5; width: 100%; max-width: 500px; text-align: left; }
         .analisis-box strong { color: var(--primary); }
 
+        /* TABLAS CENTRADAS UNIVERSALES */
         .table-container { background: var(--bg-card); border-radius: var(--radius); border: 1px solid var(--border); overflow-x: auto; -webkit-overflow-scrolling: touch;}
         table { width: 100%; border-collapse: collapse; min-width: 600px; }
         th { background: rgba(0,0,0,0.02); font-size: 0.85em; text-transform: uppercase; color: var(--text-muted); text-align: center !important; padding: 14px 16px; border-bottom: 1px solid var(--border); }
@@ -247,7 +249,7 @@
                 </svg>
             </div>
             <h2 style="color: var(--text-main); margin-bottom: 10px;">¡Gracias por preferirnos!</h2>
-            <p style="color: var(--text-muted); font-size: 14px; margin: 0;">Cerrando sesión de forma segura....</p>
+            <p style="color: var(--text-muted); font-size: 14px; margin: 0;">Cerrando sesión de forma segura...</p>
         </div>
     </div>
 
@@ -280,7 +282,7 @@
             <div style="position: relative; margin-bottom: 15px;">
                 <input type="password" id="login-pass" placeholder="Contraseña" onkeypress="if(event.key === 'Enter') iniciarSesion()" style="margin-bottom: 0; padding-right: 40px;">
                 <div onclick="togglePassword()" class="eye-btn" id="eye-icon-container" title="Mostrar/Ocultar">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" /></svg>
                 </div>
             </div>
 
@@ -607,10 +609,10 @@
             const iconContainer = document.getElementById('eye-icon-container');
             if(input.type === 'password') {
                 input.type = 'text';
-                iconContainer.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" /></svg>';
+                iconContainer.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>';
             } else {
                 input.type = 'password';
-                iconContainer.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>';
+                iconContainer.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" /></svg>';
             }
         }
 
@@ -981,7 +983,7 @@
                             function() { 
                                 misDatos.datos.activos.push({ nombre: m.nombre, categoria: 'Otro', valor: m.ahorrado, fecha: new Date().toLocaleDateString('es-ES') }); 
                                 misDatos.datos.ahorros_totales -= m.ahorrado;
-                                misDatos.datos.transacciones.push({ fecha: new Date().toLocaleDateString('es-ES'), fechaIso: new Date().toISOString().split('T')[0], tipo: 'UsoAhorro', detalle: `Compra de activo con fondos de meta: ${m.nombre}`, monto: m.ahorrado, metaId: null });
+                                misDatos.datos.transacciones.push({ fecha: new Date().toLocaleDateString('es-ES'), fechaIso: new DatetoISOString().split('T')[0], tipo: 'UsoAhorro', detalle: `Compra de activo con fondos de meta: ${m.nombre}`, monto: m.ahorrado, metaId: null });
                                 actualizarTodo(); mostrarAlerta("Permuta de Activo Exitosa", "El dinero ha salido de tus ahorros y el bien ha sido añadido exitosamente a tu lista de Activos."); 
                             }, "Sí, convertir", "No, solo archivar", false 
                         );
@@ -1042,7 +1044,7 @@
         }
         function limpiarFiltrosAvanzados() { document.getElementById('filtro-inicio').value = ''; document.getElementById('filtro-fin').value = ''; document.getElementById('filtro-tipo').value = 'Todos'; document.getElementById('filtro-ahorro-select').value = 'Todos'; document.getElementById('filtro-deuda-select').value = 'Todas'; verificarSubfiltrosMovimientos(); aplicarFiltrosAvanzados(); }
         function descargarRespaldo() { misDatos.seguridad.ultima_sesion = new Date().toISOString(); const fecha = new Date().toISOString().split('T')[0]; const blob = new Blob([JSON.stringify(misDatos, null, 2)], { type: 'application/json' }); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `Boveda_${misDatos.seguridad.usuario}_${fecha}.json`; a.click(); document.getElementById('last-session-trigger').textContent = "Última sesión: " + formatearFechaElegante(misDatos.seguridad.ultima_sesion); guardarEnMemoriaSession(); const btnIcon = document.querySelector('.btn-respaldo svg'); if(btnIcon){ btnIcon.style.transform = 'scale(0.8)'; setTimeout(() => btnIcon.style.transform = 'scale(1)', 200);} }
-        function exportarCSV() { const fechaHoy = new Date().toLocaleDateString('es-ES'); let csv = `"HISTORIAL FINANCIERO - Generado el ${fechaHoy}"\n`; csv += "Fecha,Tipo de Movimiento,Detalle / Descripción,Monto ($), Saldo Disponible ($)\n"; misDatos.datos.transacciones.forEach(tx => { csv += `"${tx.fecha}","${tx.tipo}","${tx.detalle}","${tx.monto.toFixed(2)}","${(tx.saldo_historico || 0).toFixed(2)}"\n`; }); const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' }); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `Historial_Financiero_${new Date().toISOString().split('T')[0]}.csv`; a.click(); }
+        function exportarCSV() { const fechaHoy = new Date().toLocaleDateString('es-ES'); let csv = `"HISTORIAL FINANCIERO - Generado el ${fechaHoy}"\n`; csv += "Fecha,Tipo de Movimiento,Detalle / Descripción,Monto ($), Saldo Post-Movimiento ($)\n"; misDatos.datos.transacciones.forEach(tx => { csv += `"${tx.fecha}","${tx.tipo}","${tx.detalle}","${tx.monto.toFixed(2)}","${(tx.saldo_historico || 0).toFixed(2)}"\n`; }); const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' }); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `Historial_Financiero_${new Date().toISOString().split('T')[0]}.csv`; a.click(); }
     </script>
 </body>
 </html>
