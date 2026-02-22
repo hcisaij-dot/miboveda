@@ -39,7 +39,7 @@
         .modal-overlay { display: none; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); }
         #custom-alert-modal, #confirm-modal, #logout-message-modal { z-index: 3000; }
         
-        .login-card { background: var(--bg-card); padding: 40px 30px; border-radius: 16px; width: 90%; max-width: 340px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); animation: smoothFadeIn 0.4s ease-out; position: relative; }
+        .login-card { background: var(--bg-card); padding: 40px 30px; border-radius: 16px; width: 90%; max-width: 340px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); animation: smoothFadeIn 0.4s ease-out; }
         .modal-card { background: var(--bg-card); padding: 30px; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); max-height: 90vh; overflow-y: auto; animation: smoothFadeIn 0.3s ease-out; }
         
         .modal-sm { width: 90%; max-width: 350px; }
@@ -91,7 +91,7 @@
         .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 30px; }
         .card { background: var(--bg-card); padding: 25px 25px 35px 25px; border-radius: var(--radius); box-shadow: var(--shadow); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); border: 2px solid transparent; cursor: pointer; position: relative; overflow: hidden; display: flex; flex-direction: column;}
         .card.active-detail { border-color: var(--primary); background: rgba(24, 119, 242, 0.05); }
-        .card::after { content: '↓'; position: absolute; bottom: 0; left: 0; width: 100%; text-align: center; font-size: 10px; background: rgba(0,0,0,0.05); color: var(--text-muted); padding: 5px 0; opacity: 0; transition: opacity 0.3s ease; }
+        .card::after { content: 'Ver detalles de hoy ↓'; position: absolute; bottom: 0; left: 0; width: 100%; text-align: center; font-size: 10px; background: rgba(0,0,0,0.05); color: var(--text-muted); padding: 5px 0; opacity: 0; transition: opacity 0.3s ease; }
         .card:hover::after { opacity: 1; }
         .card-label { font-size: 0.85em; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.4; margin-bottom: 15px;} 
         .card-bottom-content { margin-top: auto; }
@@ -189,9 +189,6 @@
         .eye-btn { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; color: var(--text-muted); display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; transition: all 0.2s ease; }
         .eye-btn:hover { color: var(--primary); background: rgba(24, 119, 242, 0.1); transform: translateY(-50%) scale(1.1); }
 
-        .lang-switch-box { display: flex; background: rgba(0,0,0,0.05); border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
-        .lang-btn { padding: 8px 16px; font-size: 12px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-
         @media (max-width: 768px) {
             #app-container { padding: 0 15px 30px 15px; margin-top: 15px; }
             .app-header-premium { flex-direction: column; align-items: stretch; gap: 20px; padding: 20px; }
@@ -249,8 +246,8 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
             </div>
-            <h2 style="color: var(--text-main); margin-bottom: 10px;" data-i18n="lo_tit">¡Gracias por preferirnos!</h2>
-            <p style="color: var(--text-muted); font-size: 14px; margin: 0;" data-i18n="lo_sub">Cerrando sesión de forma segura...</p>
+            <h2 style="color: var(--text-main); margin-bottom: 10px;">¡Gracias por preferirnos!</h2>
+            <p style="color: var(--text-muted); font-size: 14px; margin: 0;">Cerrando sesión de forma segura...</p>
         </div>
     </div>
 
@@ -258,7 +255,7 @@
         <div class="modal-card modal-sm">
             <h3 id="alert-title" style="color: var(--primary); margin-bottom: 10px; text-align: center;"></h3>
             <p id="alert-message" style="color: var(--text-muted); font-size: 14px; margin-bottom: 25px; white-space: pre-wrap; line-height: 1.5; text-align: center;"></p>
-            <button onclick="cerrarModal('custom-alert-modal')" style="width: 100%;" data-i18n="btn_ace">Aceptar</button>
+            <button onclick="cerrarModal('custom-alert-modal')" style="width: 100%;">Aceptar</button>
         </div>
     </div>
 
@@ -274,35 +271,29 @@
     </div>
 
     <div id="login-modal">
-        <div style="position: absolute; top: 15px; right: 15px; display: flex; gap: 5px; font-size: 11px; font-weight: bold;">
-            <span onclick="aplicarIdioma('es')" id="login-es" style="cursor: pointer; color: var(--primary);">ES</span>
-            <span style="color: var(--text-muted);">|</span>
-            <span onclick="aplicarIdioma('en')" id="login-en" style="cursor: pointer; color: var(--text-muted);">EN</span>
-        </div>
-
         <div class="login-card">
-            <h2 style="color: var(--primary); margin-bottom: 10px;" data-i18n="l_tit">Bienvenido</h2>
-            <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 25px;" data-i18n="l_sub">Accede a tu bóveda financiera personal</p>
+            <h2 style="color: var(--primary); margin-bottom: 10px;">Bienvenido</h2>
+            <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 25px;">Accede a tu bóveda financiera personal</p>
             <input type="text" value="Servidor: SERVCTOHKA S.A." disabled style="opacity: 0.7; background: rgba(0,0,0,0.03); font-weight: bold; text-align: center;">
-            <input type="text" id="login-user" data-i18n="l_usr" placeholder="Usuario" onkeypress="if(event.key === 'Enter') iniciarSesion()">
+            <input type="text" id="login-user" placeholder="Usuario" onkeypress="if(event.key === 'Enter') iniciarSesion()">
             
             <div style="position: relative; margin-bottom: 15px;">
-                <input type="password" id="login-pass" data-i18n="l_pas" placeholder="Contraseña" onkeypress="if(event.key === 'Enter') iniciarSesion()" style="margin-bottom: 0; padding-right: 40px;">
+                <input type="password" id="login-pass" placeholder="Contraseña" onkeypress="if(event.key === 'Enter') iniciarSesion()" style="margin-bottom: 0; padding-right: 40px;">
                 <div onclick="togglePassword()" class="eye-btn" id="eye-icon-container" title="Mostrar/Ocultar">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" /></svg>
                 </div>
             </div>
 
-            <label style="display:block; margin-bottom: 8px; text-align: left; font-size: 13px; font-weight: 600; color: var(--text-muted);" data-i18n="l_fil">Bóveda (.json):</label>
+            <label style="display:block; margin-bottom: 8px; text-align: left; font-size: 13px; font-weight: 600; color: var(--text-muted);">Bóveda (.json):</label>
             <div class="custom-file-container" style="margin-bottom: 20px;">
-                <label for="login-file" class="custom-file-btn" data-i18n="l_sel">Seleccionar</label>
-                <span id="login-file-name" class="file-name-display" data-i18n="l_nof">Ningún archivo...</span>
+                <label for="login-file" class="custom-file-btn">Seleccionar</label>
+                <span id="login-file-name" class="file-name-display">Ningún archivo...</span>
                 <input type="file" id="login-file" accept=".json" onchange="actualizarNombreArchivo(this, 'login-file-name')">
             </div>
-            <button onclick="iniciarSesion()" style="width: 100%; margin-bottom: 15px;" data-i18n="l_aut">Autenticar</button>
+            <button onclick="iniciarSesion()" style="width: 100%; margin-bottom: 15px;">Autenticar</button>
             <div style="border-top: 1px solid var(--border); padding-top: 15px;">
-                <span style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 8px;" data-i18n="l_new">¿Eres un usuario nuevo?</span>
-                <button onclick="abrirModalCrearBoveda()" class="btn-secondary" style="width: 100%;" data-i18n="l_cre">Generar cuenta</button>
+                <span style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 8px;">¿Eres un usuario nuevo?</span>
+                <button onclick="abrirModalCrearBoveda()" class="btn-secondary" style="width: 100%;">Generar cuenta</button>
             </div>
         </div>
     </div>
@@ -317,33 +308,33 @@
                     </svg>
                 </div>
                 <div class="brand-text-container">
-                    <h2 data-i18n="h_tit">Control Financiero</h2>
+                    <h2>Control Financiero</h2>
                     <div id="last-session-trigger" class="session-trigger" onclick="toggleSessionHistory()"></div>
                     <div id="session-history-container" class="hidden fade-in"></div>
                 </div>
             </div>
             <div class="header-actions" id="botones-dashboard">
-                <button class="btn-header btn-header-primary" onclick="abrirModalRegistro()"><span data-i18n="h_btn">+ Nuevo Movimiento</span></button>
+                <button class="btn-header btn-header-primary" onclick="abrirModalRegistro()">+ Nuevo Movimiento</button>
                 <button class="btn-header btn-header-outline" onclick="descargarRespaldo()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" /></svg>
-                    <span data-i18n="h_res">Respaldo</span>
+                    Respaldo
                 </button>
             </div>
         </div>
 
         <div class="tabs">
-            <button class="tab-btn active" onclick="cambiarPestana('vista-general', this)" data-i18n="t_gen">General</button>
-            <button class="tab-btn" onclick="cambiarPestana('pestana-activos', this)" data-i18n="t_act">Activos</button>
-            <button class="tab-btn" onclick="cambiarPestana('movimientos', this)" data-i18n="t_mov">Movimientos</button>
-            <button class="tab-btn" onclick="cambiarPestana('metas', this)" data-i18n="t_met">Metas</button>
-            <button class="tab-btn" onclick="cambiarPestana('configuracion', this)" data-i18n="t_cfg">Configuración</button>
+            <button class="tab-btn active" onclick="cambiarPestana('vista-general', this)">General</button>
+            <button class="tab-btn" onclick="cambiarPestana('pestana-activos', this)">Activos</button>
+            <button class="tab-btn" onclick="cambiarPestana('movimientos', this)">Movimientos</button>
+            <button class="tab-btn" onclick="cambiarPestana('metas', this)">Metas</button>
+            <button class="tab-btn" onclick="cambiarPestana('configuracion', this)">Configuración</button>
         </div>
 
         <div id="vista-general" class="tab-content active fade-in">
             
             <div class="cards-grid">
                 <div class="card" onclick="toggleDetalleInline('saldo', this)">
-                    <span class="card-label" data-i18n="c_liq">Liquidez Total<br><small style='text-transform:none; font-weight:normal;'>(Disponible)</small></span>
+                    <span class="card-label">Liquidez Total<br><small style="text-transform:none; font-weight:normal;">(Disponible)</small></span>
                     <div class="card-bottom-content">
                         <div class="saldo-txt txt-verde" id="dash-saldo">$0.00</div>
                         <div class="card-pct" id="dash-pct-saldo"></div>
@@ -351,7 +342,7 @@
                 </div>
                 
                 <div class="card" onclick="toggleDetalleInline('egresos', this)">
-                    <span class="card-label" data-i18n="c_egr">Egresos<br><small style='text-transform:none; font-weight:normal;'>(Acumulados)</small></span>
+                    <span class="card-label">Egresos<br><small style="text-transform:none; font-weight:normal;">(Acumulados)</small></span>
                     <div class="card-bottom-content">
                         <div class="saldo-txt txt-rojo" id="dash-egresos">$0.00</div>
                         <div class="card-pct" id="dash-pct-egresos"></div>
@@ -359,7 +350,7 @@
                 </div>
 
                 <div class="card" onclick="toggleDetalleInline('ahorros', this)">
-                    <span class="card-label" data-i18n="c_aho">Ahorros - Metas<br><small style='text-transform:none; font-weight:normal;'>(Metas)</small></span>
+                    <span class="card-label">Ahorros - Metas<br><small style="text-transform:none; font-weight:normal;">(Metas)</small></span>
                     <div class="card-bottom-content">
                         <div class="saldo-txt" style="color: var(--primary);" id="dash-ahorros">$0.00</div>
                         <div class="card-pct" id="dash-pct-ahorros"></div>
@@ -367,7 +358,7 @@
                 </div>
                 
                 <div class="card" onclick="toggleDetalleInline('deudas', this)">
-                    <span class="card-label" data-i18n="c_deu">Pasivo Corriente<br><small style='text-transform:none; font-weight:normal;'>(Deudas)</small></span>
+                    <span class="card-label">Pasivo Corriente<br><small style="text-transform:none; font-weight:normal;">(Deudas)</small></span>
                     <div class="card-bottom-content">
                         <div class="saldo-txt txt-amarillo" id="dash-deudas">$0.00</div>
                         <div class="card-pct" id="dash-pct-deudas"></div>
@@ -375,37 +366,37 @@
                 </div>
             </div>
             
-            <div id="detalle-inline-container"><h3 id="detalle-inline-titulo" data-i18n="d_det">Detalles</h3><div class="table-container"><table><thead><tr><th data-i18n="tb_fec">Fecha</th><th class="col-detalle" data-i18n="tb_det">Detalle</th><th data-i18n="tb_tip">Tipo</th><th class="fin-align" data-i18n="tb_mon">Monto</th><th class="fin-align" data-i18n="tb_sal">Saldo</th></tr></thead><tbody id="tabla-detalle-inline"></tbody></table></div></div>
+            <div id="detalle-inline-container"><h3 id="detalle-inline-titulo">Detalles</h3><div class="table-container"><table><thead><tr><th>Fecha</th><th class="col-detalle">Detalle</th><th>Tipo</th><th class="fin-align">Monto</th><th class="fin-align">Saldo</th></tr></thead><tbody id="tabla-detalle-inline"></tbody></table></div></div>
 
             <div class="banner-patrimonio-clickable fade-in" onclick="clickBannerPatrimonio()">
                 <div>
-                    <h3 data-i18n="d_pat">Patrimonio Neto</h3>
+                    <h3 title="Fórmula: (Activos Fijos + Liquidez + Ahorros) - Deudas Totales">Patrimonio Neto</h3>
                 </div>
                 <div class="monto" id="dash-patrimonio-neto">$0.00</div>
             </div>
 
             <div class="grafico-container fade-in">
-                <h3 style="color: var(--text-muted); margin-bottom: 5px;" data-i18n="d_din">Distribución de Ingresos</h3>
+                <h3 style="color: var(--text-muted); margin-bottom: 5px;">Distribución de Ingresos</h3>
                 <div class="pie-chart-wrapper">
                     <div id="css-pie-chart" class="pie-chart"></div>
-                    <div class="pie-hole"><span style="font-size: 12px; color: var(--text-muted);" data-i18n="d_tin">Total Ingresado</span><span id="total-flujo" style="font-weight: bold; font-size: 18px;">$0</span></div>
+                    <div class="pie-hole"><span style="font-size: 12px; color: var(--text-muted);">Total Ingresado</span><span id="total-flujo" style="font-weight: bold; font-size: 18px;">$0</span></div>
                 </div>
                 <div class="leyenda-grafico">
-                    <div class="leyenda-item"><div class="leyenda-color-txt"><div class="color-dot" style="background: var(--ingreso);"></div><span data-i18n="d_sdi">Disponible</span></div><span id="pct-ingreso">$0.00 (0%)</span></div>
-                    <div class="leyenda-item"><div class="leyenda-color-txt"><div class="color-dot" style="background: var(--primary);"></div><span data-i18n="d_sah">Ahorrado</span></div><span id="pct-ahorro">$0.00 (0%)</span></div>
-                    <div class="leyenda-item"><div class="leyenda-color-txt"><div class="color-dot" style="background: var(--egreso);"></div><span data-i18n="d_sga">Gastado</span></div><span id="pct-egreso">$0.00 (0%)</span></div>
+                    <div class="leyenda-item"><div class="leyenda-color-txt"><div class="color-dot" style="background: var(--ingreso);"></div>Disponible</div><span id="pct-ingreso">$0.00 (0%)</span></div>
+                    <div class="leyenda-item"><div class="leyenda-color-txt"><div class="color-dot" style="background: var(--primary);"></div>Ahorrado</div><span id="pct-ahorro">$0.00 (0%)</span></div>
+                    <div class="leyenda-item"><div class="leyenda-color-txt"><div class="color-dot" style="background: var(--egreso);"></div>Gastado</div><span id="pct-egreso">$0.00 (0%)</span></div>
                 </div>
-                <div id="analisis-mensual" class="analisis-box fade-in"></div>
+                <div id="analisis-mensual" class="analisis-box fade-in">Cargando análisis...</div>
             </div>
         </div>
 
         <div id="pestana-activos" class="tab-content fade-in">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
                 <div>
-                    <h3 style="margin: 0 0 5px 0; color: var(--text-main); font-size: 1.5em;" data-i18n="a_tit">Mis Activos Fijos</h3>
-                    <p style="margin:0; font-size: 13px; color: var(--text-muted);" data-i18n="a_sub">Registra tus bienes de valor (Vehículos, Inmuebles, Tecnología) para calcular tu Riqueza Real.</p>
+                    <h3 style="margin: 0 0 5px 0; color: var(--text-main); font-size: 1.5em;">Mis Activos Fijos</h3>
+                    <p style="margin:0; font-size: 13px; color: var(--text-muted);">Registra tus bienes de valor (Vehículos, Inmuebles, Tecnología) para calcular tu Riqueza Real.</p>
                 </div>
-                <button onclick="abrirModalActivo()" style="background: var(--activo);" data-i18n="a_btn">+ Registrar</button>
+                <button onclick="abrirModalActivo()" style="background: var(--activo);">+ Registrar</button>
             </div>
 
             <div class="activos-grid" id="contenedor-activos">
@@ -415,46 +406,37 @@
         <div id="movimientos" class="tab-content fade-in">
             <div class="movimientos-header">
                 <div class="movimientos-actions-top">
-                    <button onclick="exportarCSV()" class="btn-excel"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg><span data-i18n="m_btn">Exportar Excel</span></button>
+                    <button onclick="exportarCSV()" class="btn-excel"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>Exportar Excel</button>
                 </div>
                 <div class="filtros-container-unified">
-                    <div class="filtro-group"><span data-i18n="m_des">Desde:</span><input type="date" id="filtro-inicio"></div>
-                    <div class="filtro-group"><span data-i18n="m_has">Hasta:</span><input type="date" id="filtro-fin"></div>
-                    <div class="filtro-group"><span data-i18n="m_tip">Tipo:</span><select id="filtro-tipo" onchange="verificarSubfiltrosMovimientos()">
-                        <option value="Todos" data-i18n="op_tod">Todos</option>
-                        <option value="Ingreso" data-i18n="o_ing">Ingresos (+)</option>
-                        <option value="Egreso" data-i18n="o_egr">Egresos (-)</option>
-                        <option value="Ahorro" data-i18n="o_aho">Ahorros (+)</option>
-                        <option value="Deuda" data-i18n="o_deu">Deudas (+)</option>
-                        <option value="PagoDeuda" data-i18n="o_pag">Pago Deuda (-)</option>
-                        <option value="Reverso" data-i18n="o_rev">Reversos</option>
-                        <option value="UsoAhorro" data-i18n="o_uso">Uso de Ahorros</option>
-                    </select></div>
+                    <div class="filtro-group"><span>Desde:</span><input type="date" id="filtro-inicio"></div>
+                    <div class="filtro-group"><span>Hasta:</span><input type="date" id="filtro-fin"></div>
+                    <div class="filtro-group"><span>Tipo:</span><select id="filtro-tipo" onchange="verificarSubfiltrosMovimientos()"><option value="Todos">Todos</option><option value="Ingreso">Ingresos</option><option value="Egreso">Egresos</option><option value="Ahorro">Ahorros</option><option value="Deuda">Adquisición Deudas</option><option value="PagoDeuda">Pagos a Deuda</option><option value="Reverso">Reversos</option><option value="UsoAhorro">Uso de Ahorros</option></select></div>
                     <div style="display: flex; gap: 10px;">
-                        <button onclick="aplicarFiltrosAvanzados()" style="flex:1;" data-i18n="m_fil">Filtrar</button>
-                        <button onclick="limpiarFiltrosAvanzados()" class="btn-secondary" style="flex:1;" data-i18n="m_lim">Limpiar</button>
+                        <button onclick="aplicarFiltrosAvanzados()" style="flex:1;">Filtrar</button>
+                        <button onclick="limpiarFiltrosAvanzados()" class="btn-secondary" style="flex:1;">Limpiar</button>
                     </div>
                     <div id="fila-subfiltros" class="hidden">
-                        <div class="filtro-group hidden" id="caja-filtro-ahorro" style="flex: 1;"><span data-i18n="m_subt">Subtipo:</span><select id="filtro-ahorro-select" style="width: 100%;"></select></div>
-                        <div class="filtro-group hidden" id="caja-filtro-deuda" style="flex: 1;"><span data-i18n="m_eti">Etiqueta:</span><select id="filtro-deuda-select" style="width: 100%;"></select></div>
+                        <div class="filtro-group hidden" id="caja-filtro-ahorro" style="flex: 1;"><span>Subtipo:</span><select id="filtro-ahorro-select" style="width: 100%;"></select></div>
+                        <div class="filtro-group hidden" id="caja-filtro-deuda" style="flex: 1;"><span>Etiqueta:</span><select id="filtro-deuda-select" style="width: 100%;"></select></div>
                     </div>
                 </div>
             </div>
             <div class="table-container">
-                <table><thead><tr><th data-i18n="tb_fec">Fecha</th><th data-i18n="tb_tip">Tipo</th><th class="col-detalle" data-i18n="tb_det">Detalle</th><th class="fin-align" data-i18n="tb_mon">Monto</th><th class="fin-align" data-i18n="tb_sac">Saldo Acumulado</th></tr></thead><tbody id="tabla-movimientos"></tbody></table>
+                <table><thead><tr><th>Fecha</th><th>Tipo</th><th class="col-detalle">Detalle</th><th class="fin-align">Monto</th><th class="fin-align">Saldo Acumulado</th></tr></thead><tbody id="tabla-movimientos"></tbody></table>
             </div>
         </div>
 
         <div id="metas" class="tab-content fade-in">
             <div class="metas-top-bar">
                 <div>
-                    <h3 style="margin: 0 0 15px 0; color: var(--text-main); font-size: 1.5em;" data-i18n="mt_tit">Gestión de Objetivos</h3>
+                    <h3 style="margin: 0 0 15px 0; color: var(--text-main); font-size: 1.5em;">Gestión de Objetivos</h3>
                     <div class="sub-tabs-container">
-                        <button class="sub-tab-btn active" onclick="cambiarSubPestanaMetas('activas', this)" data-i18n="mt_act">Metas Activas</button>
-                        <button class="sub-tab-btn" onclick="cambiarSubPestanaMetas('archivadas', this)" data-i18n="mt_his">Historial Cumplidos</button>
+                        <button class="sub-tab-btn active" onclick="cambiarSubPestanaMetas('activas', this)">Metas Activas</button>
+                        <button class="sub-tab-btn" onclick="cambiarSubPestanaMetas('archivadas', this)">Historial Cumplidos</button>
                     </div>
                 </div>
-                <button onclick="abrirModalMeta()" data-i18n="mt_btn">+ Nueva Meta</button>
+                <button onclick="abrirModalMeta()">+ Nueva Meta</button>
             </div>
 
             <div class="metas-grid-compact fade-in" id="contenedor-metas-activas"></div>
@@ -465,109 +447,92 @@
             <div class="config-profile-header">
                 <div style="display: flex; align-items: center;"><div class="profile-avatar" id="profile-avatar-display">U</div><div><h2 style="margin:0; font-size: 1.5em;" id="profile-name-display">Usuario</h2><span style="color: var(--text-muted); font-size: 14px;" id="profile-email-display">Sin correo registrado</span></div></div>
                 <div style="display: flex; gap: 10px;">
-                    <button class="profile-btn btn-edit-profile" onclick="abrirModalPerfil()" data-i18n="cf_btn">Editar Perfil</button>
+                    <button class="profile-btn btn-edit-profile" onclick="abrirModalPerfil()">Editar Perfil</button>
                     <button class="profile-btn btn-logout" onclick="cerrarSesion()" title="Cerrar Sesión"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg></button>
                 </div>
             </div>
-            <div class="config-item">
-                <div>
-                    <h3 style="margin-bottom: 5px;" data-i18n="cf_mod">Modo Oscuro</h3>
-                    <span style="color: var(--text-muted); font-size: 14px;" data-i18n="cf_mo_s">Alternar apariencia.</span>
-                </div>
-                <label class="switch"><input type="checkbox" id="toggle-dark" onchange="alternarModoOscuro()"><span class="slider"></span></label>
-            </div>
-            
-            <div class="config-item">
-                <div>
-                    <h3 style="margin-bottom: 5px;" data-i18n="cf_idi">Idioma / Language</h3>
-                    <span style="color: var(--text-muted); font-size: 14px;" data-i18n="cf_id_s">Cambia el idioma de la interfaz.</span>
-                </div>
-                <div class="lang-switch-box">
-                    <div id="btn-lang-es" class="lang-btn" onclick="aplicarIdioma('es')">ES</div>
-                    <div id="btn-lang-en" class="lang-btn" onclick="aplicarIdioma('en')">EN</div>
-                </div>
-            </div>
+            <div class="config-item"><div><h3 style="margin-bottom: 5px;">Modo Oscuro</h3><span style="color: var(--text-muted); font-size: 14px;">Alternar apariencia.</span></div><label class="switch"><input type="checkbox" id="toggle-dark" onchange="alternarModoOscuro()"><span class="slider"></span></label></div>
         </div>
     </div>
 
-    <div id="registro-boveda-modal" class="modal-overlay"><div class="modal-card modal-sm"><h3 style="color: var(--primary);" data-i18n="mo_new_tit">Crear Nueva Cuenta</h3><p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;" data-i18n="mo_new_sub">Se generará un archivo en blanco.</p><label style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; display:block;" data-i18n="mo_new_u">Crea tu Usuario:</label><input type="text" id="new-boveda-user" placeholder="Ej. juanperez"><label style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; display:block;" data-i18n="mo_new_p">Crea tu Contraseña:</label><input type="password" id="new-boveda-pass" placeholder="••••••••"><div class="modal-footer"><button onclick="cerrarModal('registro-boveda-modal')" class="btn-secondary" data-i18n="md_can">Cancelar</button><button onclick="generarNuevaBoveda()" data-i18n="mo_new_btn2">Descargar Bóveda</button></div></div></div>
+    <div id="registro-boveda-modal" class="modal-overlay"><div class="modal-card modal-sm"><h3 style="color: var(--primary);">Crear Nueva Cuenta</h3><p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">Se generará un archivo en blanco.</p><label style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; display:block;">Crea tu Usuario:</label><input type="text" id="new-boveda-user" placeholder="Ej. juanperez"><label style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; display:block;">Crea tu Contraseña:</label><input type="password" id="new-boveda-pass" placeholder="••••••••"><div class="modal-footer"><button onclick="cerrarModal('registro-boveda-modal')" class="btn-secondary">Cancelar</button><button onclick="generarNuevaBoveda()">Descargar Bóveda</button></div></div></div>
     
     <div id="registro-modal" class="modal-overlay"><div class="modal-card modal-md">
-        <h3 data-i18n="mo_reg_tit">Registrar Movimiento</h3>
-        <label style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; display:block;" data-i18n="mo_reg_t">Tipo de transacción:</label>
+        <h3>Registrar Movimiento</h3>
+        <label style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; display:block;">Tipo de transacción:</label>
         <select id="reg-tipo" onchange="verificarFormularioRegistro()">
-            <option value="Ingreso" data-i18n="o_ing">Ingreso (+)</option>
-            <option value="Egreso" data-i18n="o_egr">Gasto / Egreso (-)</option>
-            <option value="Ahorro" data-i18n="o_aho">Ahorro (+)</option>
-            <option value="Deuda" data-i18n="o_deu">Préstamo (+)</option>
-            <option value="PagoDeuda" data-i18n="o_pag">Pago de Deuda (-)</option>
+            <option value="Ingreso">Ingreso (+)</option>
+            <option value="Egreso">Gasto / Egreso (-)</option>
+            <option value="Ahorro">Ahorro (+)</option>
+            <option value="Deuda">Préstamo (+)</option>
+            <option value="PagoDeuda">Pago de Deuda (-)</option>
         </select>
         
         <div id="subtipo-ahorro-container" class="hidden">
-            <label style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; display:block;" data-i18n="mo_reg_ds">¿Destino del Ahorro?</label>
+            <label style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; display:block;">¿Destino del Ahorro?</label>
             <select id="reg-subtipo" onchange="verificarDestinoAhorro()">
-                <option value="General" data-i18n="mo_rg_g">Ahorro General (Sin meta específica)</option>
-                <option value="Meta" data-i18n="mo_rg_m">A una Meta específica...</option>
+                <option value="General">Ahorro General (Sin meta específica)</option>
+                <option value="Meta">A una Meta específica...</option>
             </select>
-            <div id="select-meta-container" class="hidden" style="margin-top: 10px;"><select id="reg-meta-id"><option value="">...</option></select></div>
+            <div id="select-meta-container" class="hidden" style="margin-top: 10px;"><select id="reg-meta-id"><option value="">Selecciona una meta...</option></select></div>
         </div>
 
         <div id="detalle-container">
-            <label style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; display:block;"><span data-i18n="mo_reg_d">Detalle</span> <span id="label-detalle-hint" style="font-weight: normal; font-size: 11px;"></span>:</label>
+            <label style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; display:block;">Detalle <span id="label-detalle-hint" style="font-weight: normal; font-size: 11px;"></span>:</label>
             <input type="text" id="reg-detalle" placeholder="...">
         </div>
 
-        <label style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; display:block;" data-i18n="mo_reg_m">Monto ($):</label>
+        <label style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; display:block;">Monto ($):</label>
         <input type="number" id="reg-monto" placeholder="0.00" step="0.01" min="0" onkeypress="if(event.key === 'Enter') guardarRegistro()">
         
-        <div class="modal-footer"><button onclick="cerrarModal('registro-modal')" class="btn-secondary" data-i18n="md_can">Cancelar</button><button onclick="guardarRegistro()" data-i18n="md_gua">Guardar</button></div>
+        <div class="modal-footer"><button onclick="cerrarModal('registro-modal')" class="btn-secondary">Cancelar</button><button onclick="guardarRegistro()">Guardar</button></div>
     </div></div>
     
     <div id="activo-modal" class="modal-overlay"><div class="modal-card modal-md">
-        <h3 style="color: var(--activo);" data-i18n="mo_act_tit">Registrar Bien / Activo</h3>
-        <label style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; display:block;" data-i18n="mo_act_n">Nombre del bien:</label>
+        <h3 style="color: var(--activo);">Registrar Bien / Activo</h3>
+        <label style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; display:block;">Nombre del bien:</label>
         <input type="text" id="act-nombre" placeholder="Ej. Automóvil Toyota Yaris">
         
-        <label style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; display:block;" data-i18n="mo_act_c">Categoría:</label>
+        <label style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; display:block;">Categoría:</label>
         <select id="act-categoria">
-            <option value="Vehículo" data-i18n="ca_v">Vehículo</option>
-            <option value="Inmueble" data-i18n="ca_i">Inmueble / Terreno</option>
-            <option value="Tecnología" data-i18n="ca_t">Tecnología (PC, Móvil)</option>
-            <option value="Inversión" data-i18n="ca_in">Inversión (Acciones, Oro)</option>
-            <option value="Otro" data-i18n="ca_o">Otro</option>
+            <option value="Vehículo">Vehículo</option>
+            <option value="Inmueble">Inmueble / Terreno</option>
+            <option value="Tecnología">Tecnología (PC, Móvil)</option>
+            <option value="Inversión">Inversión (Acciones, Oro)</option>
+            <option value="Otro">Otro</option>
         </select>
 
-        <label style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; display:block;" data-i18n="mo_act_v">Valor de mercado actual ($):</label>
+        <label style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; display:block;">Valor de mercado actual ($):</label>
         <input type="number" id="act-valor" placeholder="0.00" step="0.01" min="0" onkeypress="if(event.key === 'Enter') guardarActivo()">
         
-        <div class="modal-footer"><button onclick="cerrarModal('activo-modal')" class="btn-secondary" data-i18n="md_can">Cancelar</button><button onclick="guardarActivo()" style="background: var(--activo);" data-i18n="a_btn">Registrar Activo</button></div>
+        <div class="modal-footer"><button onclick="cerrarModal('activo-modal')" class="btn-secondary">Cancelar</button><button onclick="guardarActivo()" style="background: var(--activo);">Registrar Activo</button></div>
     </div></div>
 
     <div id="meta-modal" class="modal-overlay">
         <div class="modal-card modal-lg">
-            <h3 data-i18n="mo_met_tit">Crear Nuevo Objetivo</h3>
+            <h3>Crear Nuevo Objetivo</h3>
             <div class="grid-2-cols">
-                <div><label style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; display:block;" data-i18n="mo_met_n">Nombre del objetivo:</label><input type="text" id="meta-nombre" placeholder="Ej. Laptop"></div>
-                <div><label style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; display:block;" data-i18n="mo_met_c">Costo ($):</label><input type="number" id="meta-costo" placeholder="0.00" step="0.01" min="0"></div>
+                <div><label style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; display:block;">Nombre del objetivo:</label><input type="text" id="meta-nombre" placeholder="Ej. Laptop"></div>
+                <div><label style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; display:block;">Costo ($):</label><input type="number" id="meta-costo" placeholder="0.00" step="0.01" min="0"></div>
             </div>
-            <label style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; display:block;" data-i18n="mo_met_d">Descripción (Opcional):</label>
-            <textarea id="meta-descripcion" placeholder="..."></textarea>
+            <label style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; display:block;">Descripción (Opcional):</label>
+            <textarea id="meta-descripcion" placeholder="Detalles del producto..."></textarea>
             
             <div class="flex-row-gap">
                 <div class="w-35">
-                    <label style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; display:block;" data-i18n="mo_met_a">Ahorro inicial ($):</label>
+                    <label style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; display:block;">Ahorro inicial ($):</label>
                     <input type="number" id="meta-ahorrado" placeholder="0.00" step="0.01" min="0" style="height: 43px; margin-bottom: 0;">
                 </div>
                 <div class="w-65">
-                    <label style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; display:block;" data-i18n="mo_met_i">Imagen:</label>
+                    <label style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; display:block;">Imagen:</label>
                     <div class="custom-file-container" style="margin-bottom: 0;">
-                        <label for="meta-imagen" class="custom-file-btn" data-i18n="l_sel">Seleccionar</label>
-                        <span id="meta-file-name" class="file-name-display" data-i18n="l_nof">Sin imagen</span>
+                        <label for="meta-imagen" class="custom-file-btn">Seleccionar</label>
+                        <span id="meta-file-name" class="file-name-display">Sin imagen</span>
                         <input type="file" id="meta-imagen" accept="image/*" onchange="procesarImagen(event, 'meta-file-name', (base64) => imagenMetaActual = base64)">
                     </div>
                 </div>
             </div>
-            <div class="modal-footer"><button onclick="cerrarModal('meta-modal')" class="btn-secondary" data-i18n="md_can">Cancelar</button><button onclick="guardarMeta()" data-i18n="mo_met_b">Crear Meta</button></div>
+            <div class="modal-footer"><button onclick="cerrarModal('meta-modal')" class="btn-secondary">Cancelar</button><button onclick="guardarMeta()">Crear Meta</button></div>
         </div>
     </div>
     
@@ -575,7 +540,7 @@
         <div class="modal-card modal-xl meta-detail-layout">
             <div class="meta-detail-img">
                 <img id="md-imagen" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top:0; left:0;">
-                <div id="md-badge" class="badge-cumplida hidden" style="position: absolute; top: 15px; left: 15px; font-size: 12px; padding: 6px 12px;" data-i18n="m_lis">¡LISTA PARA COMPRAR!</div>
+                <div id="md-badge" class="badge-cumplida hidden" style="position: absolute; top: 15px; left: 15px; font-size: 12px; padding: 6px 12px;">¡LISTA PARA COMPRAR!</div>
             </div>
             <div class="meta-detail-info">
                 <div id="md-info-principal">
@@ -583,21 +548,21 @@
                     <div id="md-fecha-creacion" style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">Creado el: -</div>
                     <div id="md-desc" style="font-size: 14px; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5; max-height: 80px; overflow-y: auto;">Descripción...</div>
                     <div style="background: rgba(0,0,0,0.03); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;"><span style="color: var(--text-main); font-weight: 600;" data-i18n="m_cos">Costo Total:</span><span style="color: var(--text-main); font-weight: bold;" id="md-costo">$0.00</span></div>
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 2px;"><span style="font-weight: 600; color: var(--text-muted);" data-i18n="m_ahs">Ahorrado:</span><span style="font-weight: bold; color: var(--primary);" id="md-ahorrado">$0.00</span></div>
-                        <div style="text-align: right;"><span class="link-historial" id="md-btn-historial" onclick="toggleHistorialMeta()" data-i18n="m_ver">Ver historial</span></div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;"><span style="color: var(--text-main); font-weight: 600;">Costo Total:</span><span style="color: var(--text-main); font-weight: bold;" id="md-costo">$0.00</span></div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 2px;"><span style="font-weight: 600; color: var(--text-muted);">Ahorrado:</span><span style="font-weight: bold; color: var(--primary);" id="md-ahorrado">$0.00</span></div>
+                        <div style="text-align: right;"><span class="link-historial" id="md-btn-historial" onclick="toggleHistorialMeta()">Ver historial</span></div>
                     </div>
                     <div class="barra-progreso-mini" style="height: 12px; margin-bottom: 5px;"><div id="md-barra" class="progreso-fill-mini"></div></div>
                     <div style="text-align: right; font-size: 12px; font-weight: bold; color: var(--text-muted); margin-bottom: 20px;" id="md-porcentaje">0%</div>
-                    <button id="btn-archivar-meta" class="hidden" style="width: 100%; background: var(--gold); color: #333;" onclick="archivarMetaActual()" data-i18n="m_arc">¡Meta Adquirida! Archivar en Historial</button>
+                    <button id="btn-archivar-meta" class="hidden" style="width: 100%; background: var(--gold); color: #333;" onclick="archivarMetaActual()">¡Meta Adquirida! Archivar en Historial</button>
                 </div>
                 <div id="md-historial-seccion" class="hidden" style="flex: 1; display: flex; flex-direction: column;">
-                    <h4 style="margin-bottom: 10px; color: var(--text-main); border-bottom: 1px solid var(--border); padding-bottom: 5px;"><span data-i18n="m_hd">Historial de Depósitos</span><span class="link-historial" style="float: right; font-weight: normal;" onclick="toggleHistorialMeta()" data-i18n="m_vol">Volver a info</span></h4>
+                    <h4 style="margin-bottom: 10px; color: var(--text-main); border-bottom: 1px solid var(--border); padding-bottom: 5px;">Historial de Depósitos<span class="link-historial" style="float: right; font-weight: normal;" onclick="toggleHistorialMeta()">Volver a info</span></h4>
                     <div id="md-historial-container"></div>
                 </div>
                 <div style="margin-top: 25px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 20px;">
                     <button onclick="eliminarMetaActual()" class="btn-secondary btn-danger-text" style="padding: 5px 10px;" title="Eliminar definitivamente y retornar fondos"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg></button>
-                    <button onclick="cerrarModal('meta-detalle-modal')" class="btn-secondary" data-i18n="m_cer">Cerrar</button>
+                    <button onclick="cerrarModal('meta-detalle-modal')" class="btn-secondary">Cerrar</button>
                 </div>
             </div>
         </div>
@@ -605,16 +570,16 @@
     
     <div id="perfil-modal" class="modal-overlay">
         <div class="modal-card modal-lg">
-            <h3 data-i18n="cf_tit">Editar Perfil de Usuario</h3>
+            <h3>Editar Perfil de Usuario</h3>
             <div style="display: flex; gap: 20px; align-items: flex-start; margin-bottom: 20px;">
-                <div style="text-align: center;"><div class="profile-avatar" style="width: 80px; height: 80px; font-size: 32px; margin: 0 auto 10px auto;" id="edit-avatar-preview">U</div><label for="perfil-avatar" class="btn-secondary" style="padding: 5px 10px; font-size: 12px; cursor: pointer; display: inline-block;" data-i18n="cf_cam">Cambiar Foto</label><input type="file" id="perfil-avatar" accept="image/*" onchange="procesarImagen(event, null, (base64) => { imagenPerfilActual = base64; actualizarPreviewAvatar(base64); })"></div>
-                <div style="flex: 1;"><label style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; display:block;" data-i18n="cf_nom">Nombres Completos:</label><input type="text" id="perfil-nombres" placeholder="Tu nombre real"><label style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; display:block;" data-i18n="cf_usu">Usuario de Acceso (Solo lectura):</label><input type="text" id="perfil-usuario-readonly" disabled style="background: rgba(0,0,0,0.05);"></div>
+                <div style="text-align: center;"><div class="profile-avatar" style="width: 80px; height: 80px; font-size: 32px; margin: 0 auto 10px auto;" id="edit-avatar-preview">U</div><label for="perfil-avatar" class="btn-secondary" style="padding: 5px 10px; font-size: 12px; cursor: pointer; display: inline-block;">Cambiar Foto</label><input type="file" id="perfil-avatar" accept="image/*" onchange="procesarImagen(event, null, (base64) => { imagenPerfilActual = base64; actualizarPreviewAvatar(base64); })"></div>
+                <div style="flex: 1;"><label style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; display:block;">Nombres Completos:</label><input type="text" id="perfil-nombres" placeholder="Tu nombre real"><label style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; display:block;">Usuario de Acceso (Solo lectura):</label><input type="text" id="perfil-usuario-readonly" disabled style="background: rgba(0,0,0,0.05);"></div>
             </div>
             <div class="grid-2-cols">
-                <div><label style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; display:block;" data-i18n="cf_cor">Correo Electrónico:</label><input type="email" id="perfil-email" placeholder="ejemplo@correo.com"></div>
-                <div><label style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; display:block;" data-i18n="cf_tel">Teléfono:</label><input type="tel" id="perfil-telefono" placeholder="0999999999"></div>
+                <div><label style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; display:block;">Correo Electrónico:</label><input type="email" id="perfil-email" placeholder="ejemplo@correo.com"></div>
+                <div><label style="font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; display:block;">Teléfono:</label><input type="tel" id="perfil-telefono" placeholder="0999999999"></div>
             </div>
-            <div class="modal-footer"><button onclick="cerrarModal('perfil-modal')" class="btn-secondary" data-i18n="md_can">Cancelar</button><button onclick="guardarPerfil()" data-i18n="cf_gua">Guardar Cambios</button></div>
+            <div class="modal-footer"><button onclick="cerrarModal('perfil-modal')" class="btn-secondary">Cancelar</button><button onclick="guardarPerfil()">Guardar Cambios</button></div>
         </div>
     </div>
 
@@ -622,115 +587,11 @@
         let misDatos = null; let imagenMetaActual = ""; let imagenPerfilActual = ""; let tarjetaActiva = null; let indiceMetaActualVista = null;
         let accionConfirmadaPendiente = null; 
 
-        // EL MOTOR BILINGÜE
-        const dic = {
-            es: {
-                "l_tit": "Bienvenido", "l_sub": "Accede a tu bóveda financiera personal", "l_usr": "Usuario", "l_pas": "Contraseña", "l_fil": "Bóveda (.json):", "l_sel": "Seleccionar", "l_nof": "Ningún archivo...", "l_aut": "Autenticar", "l_new": "¿Eres un usuario nuevo?", "l_cre": "Generar cuenta",
-                "lo_tit": "¡Gracias por preferirnos!", "lo_sub": "Cerrando sesión de forma segura...",
-                "h_tit": "Control Financiero", "h_btn": "+ Nuevo Movimiento", "h_res": "Respaldo",
-                "t_gen": "General", "t_act": "Activos", "t_mov": "Movimientos", "t_met": "Metas", "t_cfg": "Configuración",
-                "c_liq": "Liquidez Total<br><small style='text-transform:none; font-weight:normal;'>(Disponible)</small>",
-                "c_egr": "Egresos<br><small style='text-transform:none; font-weight:normal;'>(Acumulados)</small>",
-                "c_aho": "Ahorros - Metas<br><small style='text-transform:none; font-weight:normal;'>(Metas)</small>",
-                "c_deu": "Pasivo Corriente<br><small style='text-transform:none; font-weight:normal;'>(Deudas)</small>",
-                "d_det": "Detalles", "d_pat": "Patrimonio Neto", "d_din": "Distribución de Ingresos", "d_tin": "Total Ingresado", "d_sdi": "Disponible", "d_sah": "Ahorrado", "d_sga": "Gastado",
-                "a_tit": "Mis Activos Fijos", "a_sub": "Registra tus bienes de valor (Vehículos, Inmuebles, Tecnología) para calcular tu Riqueza Real.", "a_btn": "+ Registrar",
-                "m_btn": "Exportar Excel", "m_des": "Desde:", "m_has": "Hasta:", "m_tip": "Tipo:", "m_fil": "Filtrar", "m_lim": "Limpiar", "m_subt": "Subtipo:", "m_eti": "Etiqueta:",
-                "mt_tit": "Gestión de Objetivos", "mt_act": "Metas Activas", "mt_his": "Historial Cumplidos", "mt_btn": "+ Nueva Meta",
-                "cf_tit": "Editar Perfil de Usuario", "cf_btn": "Editar Perfil", "cf_mod": "Modo Oscuro", "cf_mo_s": "Alternar apariencia.", "cf_idi": "Idioma / Language", "cf_id_s": "Cambia el idioma de la interfaz.", "cf_cam": "Cambiar Foto", "cf_nom": "Nombres Completos:", "cf_usu": "Usuario de Acceso (Solo lectura):", "cf_cor": "Correo Electrónico:", "cf_tel": "Teléfono:", "cf_gua": "Guardar Cambios",
-                "md_can": "Cancelar", "md_gua": "Guardar", "md_ace": "Aceptar",
-                "tb_fec": "Fecha", "tb_det": "Detalle", "tb_tip": "Tipo", "tb_mon": "Monto", "tb_sal": "Saldo", "tb_sac": "Saldo Acumulado",
-                "o_ing": "Ingreso (+)", "o_egr": "Gasto / Egreso (-)", "o_aho": "Ahorro (+)", "o_deu": "Préstamo (+)", "o_pag": "Pago de Deuda (-)", "op_tod": "Todos", "o_rev": "Reversos", "o_uso": "Uso de Ahorros",
-                "mo_new_tit": "Crear Nueva Cuenta", "mo_new_sub": "Se generará un archivo en blanco.", "mo_new_u": "Crea tu Usuario:", "mo_new_p": "Crea tu Contraseña:", "mo_new_btn2": "Descargar Bóveda",
-                "mo_reg_tit": "Registrar Movimiento", "mo_reg_t": "Tipo de transacción:", "mo_reg_d": "Detalle", "mo_reg_m": "Monto ($):", "mo_reg_ds": "¿Destino del Ahorro?", "mo_rg_g": "Ahorro General", "mo_rg_m": "A una Meta específica...",
-                "mo_act_tit": "Registrar Bien / Activo", "mo_act_n": "Nombre del bien:", "mo_act_c": "Categoría:", "mo_act_v": "Valor de mercado actual ($):", "ca_v": "Vehículo", "ca_i": "Inmueble / Terreno", "ca_t": "Tecnología (PC, Móvil)", "ca_in": "Inversión (Acciones, Oro)", "ca_o": "Otro",
-                "mo_met_tit": "Crear Nuevo Objetivo", "mo_met_n": "Nombre del objetivo:", "mo_met_c": "Costo ($):", "mo_met_d": "Descripción (Opcional):", "mo_met_a": "Ahorro inicial ($):", "mo_met_i": "Imagen:", "mo_met_b": "Crear Meta",
-                "m_lis": "¡LISTA PARA COMPRAR!", "m_cos": "Costo Total:", "m_ahs": "Ahorrado:", "m_ver": "Ver historial", "m_arc": "¡Meta Adquirida! Archivar en Historial", "m_hd": "Historial de Depósitos", "m_vol": "Volver a info", "m_cer": "Cerrar",
-                "js_pc": " de tu capital real", "js_dp": "¡Peligro! Deuda supera el capital", "js_re": "Ratio de endeudamiento: ",
-                "js_gsi": "Gastos sin ingresos registrados", "js_rg": "Ratio de gasto: ", "js_di": "% de tus ingresos",
-                "js_na": "No hay actividad registrada el día de hoy para esta categoría.", "js_nm": "No se encontraron movimientos.",
-                "js_nar": "No tienes activos registrados.", "js_nma": "No tienes objetivos activos.", "js_nmh": "Aún no tienes objetivos archivados.",
-                "an_0": "💡 Aún no tienes movimientos este mes. ¡Registra tus ingresos para comenzar tu análisis automático!",
-                "an_1": "⚠️ <strong>Alerta de Capital:</strong> Se detectaron gastos este mes pero no nuevos ingresos. Vigila tu liquidez.",
-                "an_2": "🔴 <strong>¡Cuidado!</strong> Tus salidas de dinero superan a tus ingresos de este mes. Intenta reducir gastos.",
-                "an_3": "🟠 <strong>Atención:</strong> Ya has gastado el <strong>{X}%</strong> de tus ingresos mensuales. Modera tus salidas.",
-                "an_4": "🟢 <strong>Buen ritmo:</strong> Tus gastos están controlados ({X}%) y sigues ahorrando. ¡Mantén esa disciplina!",
-                "an_5": "🟡 <strong>Vas bien:</strong> Has gastado el {X}% de lo ingresado. Sería ideal destinar el excedente a Metas.",
-                "an_6": "🌟 <strong>¡Excelente mes!</strong> Gastos bajos y ahorros en aumento. Tu salud financiera es envidiable.",
-                "an_7": "🟢 <strong>Gran liquidez:</strong> Estás gastando muy poco este mes. Perfecto para fijar una nueva Meta."
-            },
-            en: {
-                "l_tit": "Welcome", "l_sub": "Access your personal financial vault", "l_usr": "Username", "l_pas": "Password", "l_fil": "Vault (.json):", "l_sel": "Select", "l_nof": "No file...", "l_aut": "Authenticate", "l_new": "Are you a new user?", "l_cre": "Create account",
-                "lo_tit": "Thanks for choosing us!", "lo_sub": "Closing session securely...",
-                "h_tit": "Financial Control", "h_btn": "+ New Transaction", "h_res": "Backup",
-                "t_gen": "Dashboard", "t_act": "Assets", "t_mov": "Transactions", "t_met": "Goals", "t_cfg": "Settings",
-                "c_liq": "Total Liquidity<br><small style='text-transform:none; font-weight:normal;'>(Available)</small>",
-                "c_egr": "Expenses<br><small style='text-transform:none; font-weight:normal;'>(Accumulated)</small>",
-                "c_aho": "Savings - Goals<br><small style='text-transform:none; font-weight:normal;'>(Goals)</small>",
-                "c_deu": "Current Liabilities<br><small style='text-transform:none; font-weight:normal;'>(Debts)</small>",
-                "d_det": "Details", "d_pat": "Net Worth", "d_din": "Income Distribution", "d_tin": "Total Income", "d_sdi": "Available", "d_sah": "Saved", "d_sga": "Spent",
-                "a_tit": "My Fixed Assets", "a_sub": "Log your valuable assets (Vehicles, Real Estate, Tech) to calculate your Real Wealth.", "a_btn": "+ Register",
-                "m_btn": "Export Excel", "m_des": "From:", "m_has": "To:", "m_tip": "Type:", "m_fil": "Filter", "m_lim": "Clear", "m_subt": "Subtype:", "m_eti": "Tag:",
-                "mt_tit": "Goal Management", "mt_act": "Active Goals", "mt_his": "Completed History", "mt_btn": "+ New Goal",
-                "cf_tit": "Edit User Profile", "cf_btn": "Edit Profile", "cf_mod": "Dark Mode", "cf_mo_s": "Toggle appearance.", "cf_idi": "Language / Idioma", "cf_id_s": "Change interface language.", "cf_cam": "Change Photo", "cf_nom": "Full Name:", "cf_usu": "Username (Read-only):", "cf_cor": "Email Address:", "cf_tel": "Phone Number:", "cf_gua": "Save Changes",
-                "md_can": "Cancel", "md_gua": "Save", "md_ace": "Accept",
-                "tb_fec": "Date", "tb_det": "Detail", "tb_tip": "Type", "tb_mon": "Amount", "tb_sal": "Balance", "tb_sac": "Accumulated Bal.",
-                "o_ing": "Income (+)", "o_egr": "Expense (-)", "o_aho": "Saving (+)", "o_deu": "Loan (+)", "o_pag": "Debt Payment (-)", "op_tod": "All", "o_rev": "Reversals", "o_uso": "Use of Savings",
-                "mo_new_tit": "Create New Account", "mo_new_sub": "A blank file will be generated.", "mo_new_u": "Create Username:", "mo_new_p": "Create Password:", "mo_new_btn2": "Download Vault",
-                "mo_reg_tit": "Log Transaction", "mo_reg_t": "Transaction type:", "mo_reg_d": "Detail", "mo_reg_m": "Amount ($):", "mo_reg_ds": "Saving Destination?", "mo_rg_g": "General Saving", "mo_rg_m": "To a specific Goal...",
-                "mo_act_tit": "Register Asset", "mo_act_n": "Asset name:", "mo_act_c": "Category:", "mo_act_v": "Current market value ($):", "ca_v": "Vehicle", "ca_i": "Real Estate / Land", "ca_t": "Tech (PC, Mobile)", "ca_in": "Investment (Stocks, Gold)", "ca_o": "Other",
-                "mo_met_tit": "Create New Goal", "mo_met_n": "Goal name:", "mo_met_c": "Cost ($):", "mo_met_d": "Description (Optional):", "mo_met_a": "Initial saving ($):", "mo_met_i": "Image:", "mo_met_b": "Create Goal",
-                "m_lis": "READY TO BUY!", "m_cos": "Total Cost:", "m_ahs": "Saved:", "m_ver": "View history", "m_arc": "Goal Achieved! Archive", "m_hd": "Deposit History", "m_vol": "Back to info", "m_cer": "Close",
-                "js_pc": " of your real capital", "js_dp": "Danger! Debt exceeds capital", "js_re": "Debt ratio: ",
-                "js_gsi": "Expenses without logged income", "js_rg": "Expense ratio: ", "js_di": "% of your income",
-                "js_na": "No logged activity today for this category.", "js_nm": "No transactions found.",
-                "js_nar": "You have no logged assets.", "js_nma": "You have no active goals.", "js_nmh": "You have no archived goals yet.",
-                "an_0": "💡 You have no transactions this month. Log your income to start the automatic analysis!",
-                "an_1": "⚠️ <strong>Capital Alert:</strong> Expenses were detected this month but no new income. Watch your liquidity.",
-                "an_2": "🔴 <strong>Careful!</strong> Your outflows are exceeding your income this month. Try to reduce expenses.",
-                "an_3": "🟠 <strong>Attention:</strong> You have already spent <strong>{X}%</strong> of your monthly income. Moderate your spending.",
-                "an_4": "🟢 <strong>Good pace:</strong> Your expenses are controlled ({X}%) and you are saving. Keep that discipline!",
-                "an_5": "🟡 <strong>Doing well:</strong> You've spent {X}% of income. Since you have a surplus, consider setting a new Goal.",
-                "an_6": "🌟 <strong>Excellent month!</strong> Your expenses are low and your savings are growing. Enviable financial health.",
-                "an_7": "🟢 <strong>High liquidity:</strong> You are spending very little this month. Perfect time to set a new Goal."
-            }
-        };
-
-        let idiomaActual = localStorage.getItem('tohka_lang') || 'es';
-        function t(key) { return dic[idiomaActual][key] || key; }
-
-        function aplicarIdioma(lang) {
-            idiomaActual = lang;
-            localStorage.setItem('tohka_lang', lang);
-            
-            /* UI Botones Login */
-            const les = document.getElementById('login-es'); const len = document.getElementById('login-en');
-            if(les) les.style.color = lang === 'es' ? 'var(--primary)' : 'var(--text-muted)';
-            if(len) len.style.color = lang === 'en' ? 'var(--primary)' : 'var(--text-muted)';
-            
-            /* UI Botones Config */
-            const bles = document.getElementById('btn-lang-es'); const blen = document.getElementById('btn-lang-en');
-            if(bles) { bles.style.background = lang === 'es' ? 'var(--primary)' : 'transparent'; bles.style.color = lang === 'es' ? 'white' : 'var(--text-muted)'; }
-            if(blen) { blen.style.background = lang === 'en' ? 'var(--primary)' : 'transparent'; blen.style.color = lang === 'en' ? 'white' : 'var(--text-muted)'; }
-
-            /* Traducir todo el HTML */
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if(dic[lang][key]) {
-                    if(el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') { el.placeholder = dic[lang][key]; } 
-                    else { el.innerHTML = dic[lang][key]; }
-                }
-            });
-
-            if (misDatos) { actualizarTodo(); }
-        }
-
         document.addEventListener("DOMContentLoaded", () => {
-            aplicarIdioma(idiomaActual); // Aplica idioma al cargar
             const dataGuardada = sessionStorage.getItem('tohka_boveda_data');
             if(dataGuardada) {
                 misDatos = JSON.parse(dataGuardada);
-                document.getElementById('last-session-trigger').textContent = (idiomaActual==='en'?"Last session: ":"Última sesión: ") + formatearFechaElegante(misDatos.seguridad.historial_sesiones[0]);
+                document.getElementById('last-session-trigger').textContent = "Última sesión: " + formatearFechaElegante(misDatos.seguridad.historial_sesiones[0]);
                 document.getElementById('login-modal').style.display = 'none'; 
                 document.getElementById('app-container').style.display = 'block';
                 if(document.body.classList.contains('dark-mode')) document.getElementById('toggle-dark').checked = true;
@@ -741,15 +602,16 @@
         document.addEventListener('keydown', e => { if(e.key === "Escape") cerrarTodosModales(); });
         document.getElementById('filtro-inicio').addEventListener('change', function() { document.getElementById('filtro-fin').min = this.value; });
 
-        /* CORRECCIÓN DEL OJO */
         function togglePassword() {
             const input = document.getElementById('login-pass');
             const iconContainer = document.getElementById('eye-icon-container');
             if(input.type === 'password') {
-                input.type = 'text'; // OJO ABIERTO (Visible)
+                input.type = 'text';
+                /* Ojo Abierto (Sin raya) */
                 iconContainer.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>';
             } else {
-                input.type = 'password'; // OJO TACHADO (Oculto)
+                input.type = 'password';
+                /* Ojo Tachado (Con raya) */
                 iconContainer.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" /></svg>';
             }
         }
@@ -790,13 +652,13 @@
              if(cont.classList.contains('hidden')) {
                  cont.innerHTML = '';
                  const previousSessions = misDatos.seguridad.historial_sesiones.slice(1);
-                 if(previousSessions.length === 0) { cont.innerHTML = `<div class="session-history-item">${idiomaActual==='en'?'No previous sessions.':'No hay sesiones anteriores.'}</div>`; } 
-                 else { previousSessions.forEach(dateIso => { cont.innerHTML += `<div class="session-history-item">${idiomaActual==='en'?'Previous: ':'Anterior: '} ${formatearFechaElegante(dateIso)}</div>`; }); }
+                 if(previousSessions.length === 0) { cont.innerHTML = '<div class="session-history-item">No hay sesiones anteriores.</div>'; } 
+                 else { previousSessions.forEach(dateIso => { cont.innerHTML += `<div class="session-history-item">Anterior: ${formatearFechaElegante(dateIso)}</div>`; }); }
                  cont.classList.remove('hidden');
              } else { cont.classList.add('hidden'); }
         }
 
-        function actualizarNombreArchivo(input, spanId) { document.getElementById(spanId).textContent = input.files[0] ? input.files[0].name : t('l_nof'); }
+        function actualizarNombreArchivo(input, spanId) { document.getElementById(spanId).textContent = input.files[0] ? input.files[0].name : "Ningún archivo"; }
         
         function procesarImagen(e, spanId, callback) { 
             if(spanId) actualizarNombreArchivo(e.target, spanId); 
@@ -823,7 +685,7 @@
 
         function cerrarTodosModales() { document.querySelectorAll('.modal-overlay').forEach(m => m.style.display = 'none'); cerrarDetalleInline(); document.body.classList.remove('no-scroll'); }
         function cerrarModal(id) { document.getElementById(id).style.display = 'none'; if(id === 'tohka-modal') document.body.classList.remove('no-scroll'); }
-        function formatearFechaElegante(fechaIso) { if(!fechaIso) return "Primera sesión"; const opciones = { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true }; let fechaFormateada = new Date(fechaIso).toLocaleString(idiomaActual==='en'?'en-US':'es-ES', opciones); return fechaFormateada.charAt(0).toUpperCase() + fechaFormateada.slice(1); }
+        function formatearFechaElegante(fechaIso) { if(!fechaIso) return "Primera sesión registrada"; const opciones = { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true }; let fechaFormateada = new Date(fechaIso).toLocaleString('es-ES', opciones); return fechaFormateada.charAt(0).toUpperCase() + fechaFormateada.slice(1); }
         
         function fmtDinero(valor) { return `<span class="fin-align">$${valor.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>`; }
 
@@ -838,9 +700,9 @@
 
         function iniciarSesion() {
             const user = document.getElementById('login-user').value; const pass = document.getElementById('login-pass').value; const fileInput = document.getElementById('login-file').files[0];
-            if (!user) { mostrarAlerta("Error", idiomaActual==='en'?"Please enter a username.":"Por favor, ingresa tu nombre de usuario."); return; }
-            if (!pass) { mostrarAlerta("Error", idiomaActual==='en'?"Please enter a password.":"Por favor, ingresa tu contraseña."); return; }
-            if (!fileInput) { mostrarAlerta("Error", idiomaActual==='en'?"Please select your .json file.":"Debes seleccionar tu archivo .json."); return; }
+            if (!user) { mostrarAlerta("Falta Usuario", "Por favor, ingresa tu nombre de usuario."); return; }
+            if (!pass) { mostrarAlerta("Falta Contraseña", "Por favor, ingresa tu contraseña."); return; }
+            if (!fileInput) { mostrarAlerta("Falta Archivo", "Debes seleccionar tu archivo de bóveda (.json) para continuar."); return; }
 
             const lector = new FileReader();
             lector.onload = function(e) {
@@ -864,13 +726,13 @@
 
                         guardarEnMemoriaSession();
 
-                        document.getElementById('last-session-trigger').textContent = (idiomaActual==='en'?"Last session: ":"Última sesión: ") + formatearFechaElegante(misDatos.seguridad.historial_sesiones[0]);
+                        document.getElementById('last-session-trigger').textContent = "Última sesión: " + formatearFechaElegante(misDatos.seguridad.historial_sesiones[0]);
                         document.getElementById('login-modal').style.display = 'none'; document.getElementById('app-container').style.display = 'block';
                         if(document.body.classList.contains('dark-mode')) document.getElementById('toggle-dark').checked = true;
                         
                         limpiarFiltrosAvanzados(); popularSelectsAvanzados(); actualizarTodo(); renderizarDatosPerfil();
-                    } else { mostrarAlerta("Error", idiomaActual==='en'?"Invalid credentials.":"Credenciales incorrectas."); }
-                } catch (err) { mostrarAlerta("Error", idiomaActual==='en'?"Damaged file.":"Archivo dañado."); }
+                    } else { mostrarAlerta("Acceso Denegado", "Credenciales incorrectas para el archivo seleccionado."); }
+                } catch (err) { mostrarAlerta("Error de Archivo", "El archivo seleccionado está dañado o no es válido."); }
             }; lector.readAsText(fileInput);
         }
 
@@ -887,11 +749,11 @@
                 const iconContainer = document.getElementById('eye-icon-container');
                 pwdInput.value = '';
                 pwdInput.type = 'password';
-                /* Se asegura de volver a poner el Ojo Tachado al salir */
+                /* Restaurar el ojo tachado al salir */
                 iconContainer.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" /></svg>';
                 
                 document.getElementById('login-file').value = ''; 
-                document.getElementById('login-file-name').textContent = t('l_nof'); 
+                document.getElementById('login-file-name').textContent = 'Ningún archivo...'; 
                 document.getElementById('session-history-container').classList.add('hidden'); 
                 cambiarPestana('vista-general', document.querySelector('.tab-btn:first-child')); 
                 misDatos = null; 
@@ -901,10 +763,10 @@
         function abrirModalCrearBoveda() { document.getElementById('new-boveda-user').value = ''; document.getElementById('new-boveda-pass').value = ''; document.getElementById('registro-boveda-modal').style.display = 'flex'; }
         function generarNuevaBoveda() {
             const user = document.getElementById('new-boveda-user').value.trim(); const pass = document.getElementById('new-boveda-pass').value.trim();
-            if(!user || !pass) { mostrarAlerta("Error", "Faltan datos."); return; }
+            if(!user || !pass) { mostrarAlerta("Atención", "Debes ingresar un usuario y contraseña."); return; }
             const nuevaBoveda = { "seguridad": { "usuario": user, "clave": pass, "ultima_sesion": new Date().toISOString(), "perfil": { "nombres": "", "email": "", "telefono": "", "avatar": "" } }, "datos": { "saldo_disponible": 0, "ahorros_totales": 0, "deudas_totales": 0, "transacciones": [], "metas": [], "activos": [] } };
             const blob = new Blob([JSON.stringify(nuevaBoveda, null, 2)], { type: 'application/json' }); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `Boveda_${user}_NUEVA.json`; a.click();
-            cerrarModal('registro-boveda-modal'); mostrarAlerta("Info", "Archivo descargado.");
+            cerrarModal('registro-boveda-modal'); mostrarAlerta("¡Cuenta Creada!", `Se ha descargado el archivo "Boveda_${user}_NUEVA.json".\nUtilízalo para iniciar sesión.`);
         }
 
         function cambiarPestana(id, btn) { document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active')); document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); document.getElementById(id).classList.add('active'); btn.classList.add('active'); document.getElementById('botones-dashboard').style.display = (id === 'vista-general') ? 'flex' : 'none'; cerrarDetalleInline(); }
@@ -924,14 +786,14 @@
             
             const hoyIso = new Date().toISOString().split('T')[0];
             let titulo = "", datos = [], colorTitulo = "var(--text-main)";
-            if (filtro === 'saldo') { titulo = idiomaActual==='en'?"Liquidity: Today":"Liquidez: Hoy"; colorTitulo = "var(--ingreso)"; datos = misDatos.datos.transacciones.filter(tx => tx.fechaIso === hoyIso && (tx.tipo === 'Ingreso' || tx.tipo === 'Egreso' || tx.tipo === 'Ahorro' || tx.tipo === 'Reverso' || tx.tipo === 'Deuda' || tx.tipo === 'PagoDeuda')); } 
-            else if (filtro === 'egresos') { titulo = idiomaActual==='en'?"Expenses: Today":"Egresos: Hoy"; colorTitulo = "var(--egreso)"; datos = misDatos.datos.transacciones.filter(tx => tx.fechaIso === hoyIso && tx.tipo === 'Egreso'); } 
-            else if (filtro === 'ahorros') { titulo = idiomaActual==='en'?"Savings: Today":"Ahorros: Hoy"; colorTitulo = "var(--primary)"; datos = misDatos.datos.transacciones.filter(tx => tx.fechaIso === hoyIso && tx.tipo === 'Ahorro').map(tx => ({...tx, tipoVisual: 'Ahorro (+)'})); } 
-            else if (filtro === 'deudas') { titulo = idiomaActual==='en'?"Debts: Today":"Deudas: Hoy"; colorTitulo = "var(--deuda)"; datos = misDatos.datos.transacciones.filter(tx => tx.fechaIso === hoyIso && (tx.tipo === 'Deuda' || tx.tipo === 'PagoDeuda')); }
+            if (filtro === 'saldo') { titulo = "Liquidez: Actividad de Hoy"; colorTitulo = "var(--ingreso)"; datos = misDatos.datos.transacciones.filter(tx => tx.fechaIso === hoyIso && (tx.tipo === 'Ingreso' || tx.tipo === 'Egreso' || tx.tipo === 'Ahorro' || tx.tipo === 'Reverso' || tx.tipo === 'Deuda' || tx.tipo === 'PagoDeuda')); } 
+            else if (filtro === 'egresos') { titulo = "Egresos: Actividad de Hoy"; colorTitulo = "var(--egreso)"; datos = misDatos.datos.transacciones.filter(tx => tx.fechaIso === hoyIso && tx.tipo === 'Egreso'); } 
+            else if (filtro === 'ahorros') { titulo = "Ahorros: Actividad de Hoy"; colorTitulo = "var(--primary)"; datos = misDatos.datos.transacciones.filter(tx => tx.fechaIso === hoyIso && tx.tipo === 'Ahorro').map(tx => ({...tx, tipoVisual: 'Ahorro (+)'})); } 
+            else if (filtro === 'deudas') { titulo = "Deudas: Actividad de Hoy"; colorTitulo = "var(--deuda)"; datos = misDatos.datos.transacciones.filter(tx => tx.fechaIso === hoyIso && (tx.tipo === 'Deuda' || tx.tipo === 'PagoDeuda')); }
             
             tituloInline.innerText = titulo; tituloInline.style.color = colorTitulo;
             const tbody = document.getElementById('tabla-detalle-inline'); tbody.innerHTML = '';
-            if(datos.length === 0) { tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color: var(--text-muted); padding: 20px;">${t('js_na')}</td></tr>`; } 
+            if(datos.length === 0) { tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color: var(--text-muted); padding: 20px;">No hay actividad registrada el día de hoy para esta categoría.</td></tr>'; } 
             else { datos.slice().reverse().forEach(tx => { 
                 let color = tx.tipo === 'Egreso' || tx.tipo === 'PagoDeuda' ? 'var(--egreso)' : (tx.tipo === 'Deuda' ? 'var(--deuda)' : 'var(--ingreso)'); 
                 if(tx.tipoVisual === 'Ahorro (+)' || tx.esMeta || tx.tipo === 'Ahorro') color = 'var(--primary)'; 
@@ -965,14 +827,25 @@
             const box = document.getElementById('analisis-mensual');
             let mensaje = "";
 
-            if (ing === 0 && egr === 0 && aho === 0) { mensaje = t('an_0'); } 
-            else if (ing === 0 && egr > 0) { mensaje = t('an_1'); } 
-            else if (egr > ing) { mensaje = t('an_2'); } 
-            else {
+            if (ing === 0 && egr === 0 && aho === 0) {
+                mensaje = "💡 Aún no tienes movimientos este mes. ¡Registra tus ingresos para comenzar tu análisis automático!";
+            } else if (ing === 0 && egr > 0) {
+                mensaje = "⚠️ <strong>Alerta de Capital:</strong> Se detectaron gastos en este mes pero aún no has registrado nuevos ingresos. Vigila tu liquidez.";
+            } else if (egr > ing) {
+                mensaje = "🔴 <strong>¡Cuidado!</strong> Tus salidas de dinero están superando a tus ingresos de este mes. Intenta reducir gastos para no afectar tu salud financiera.";
+            } else {
                 let pct = (egr / ing) * 100;
-                if (pct > 80) { mensaje = t('an_3').replace('{X}', pct.toFixed(0)); } 
-                else if (pct > 50) { mensaje = aho > 0 ? t('an_4').replace('{X}', pct.toFixed(0)) : t('an_5').replace('{X}', pct.toFixed(0)); } 
-                else { mensaje = aho > 0 ? t('an_6') : t('an_7'); }
+                if (pct > 80) {
+                    mensaje = `🟠 <strong>Atención:</strong> Ya has gastado el <strong>${pct.toFixed(0)}%</strong> de tus ingresos mensuales. Modera tus salidas de capital.`;
+                } else if (pct > 50) {
+                    mensaje = aho > 0 
+                        ? `🟢 <strong>Buen ritmo:</strong> Tus gastos están controlados (${pct.toFixed(0)}%) y sigues ahorrando. ¡Mantén esa disciplina!` 
+                        : `🟡 <strong>Vas bien:</strong> Has gastado el ${pct.toFixed(0)}% de lo ingresado. Como tienes excedente, sería ideal destinarlo a nuevas Metas de Ahorro.`;
+                } else {
+                    mensaje = aho > 0 
+                        ? `🌟 <strong>¡Excelente mes!</strong> Tus gastos son bajos (menos del 50%) y tus ahorros van en aumento. Tu salud financiera es envidiable.` 
+                        : `🟢 <strong>Gran liquidez:</strong> Estás gastando muy poco este mes. Es el momento perfecto para fijar una nueva Meta y hacer crecer tu dinero.`;
+                }
             }
             box.innerHTML = mensaje;
         }
@@ -1000,16 +873,16 @@
             let pctDeuda = capTotal > 0 ? (misDatos.datos.deudas_totales / capTotal * 100) : (misDatos.datos.deudas_totales > 0 ? '∞' : 0);
             let pctGasto = totalIngresos > 0 ? (totalEgresos / totalIngresos * 100) : (totalEgresos > 0 ? '∞' : 0);
 
-            document.getElementById('dash-pct-saldo').innerText = pctSaldo !== '∞' ? `${pctSaldo.toFixed(1)}%${t('js_pc')}` : `0%${t('js_pc')}`;
-            document.getElementById('dash-pct-ahorros').innerText = pctAhorro !== '∞' ? `${pctAhorro.toFixed(1)}%${t('js_pc')}` : `0%${t('js_pc')}`;
+            document.getElementById('dash-pct-saldo').innerText = pctSaldo !== '∞' ? `${pctSaldo.toFixed(1)}% de tu capital real` : '0% de tu capital real';
+            document.getElementById('dash-pct-ahorros').innerText = pctAhorro !== '∞' ? `${pctAhorro.toFixed(1)}% de tu capital real` : '0% de tu capital real';
 
             let deudaEl = document.getElementById('dash-pct-deudas');
-            if(pctDeuda === '∞' || pctDeuda > 100) { deudaEl.innerText = t('js_dp'); deudaEl.style.color = "var(--egreso)"; } 
-            else { deudaEl.innerText = `${t('js_re')} ${pctDeuda.toFixed(1)}%`; if(pctDeuda > 40) deudaEl.style.color = "var(--egreso)"; else if(pctDeuda > 20) deudaEl.style.color = "var(--deuda)"; else deudaEl.style.color = "var(--ingreso)"; }
+            if(pctDeuda === '∞' || pctDeuda > 100) { deudaEl.innerText = "¡Peligro! Deuda supera el capital"; deudaEl.style.color = "var(--egreso)"; } 
+            else { deudaEl.innerText = `Ratio de endeudamiento: ${pctDeuda.toFixed(1)}%`; if(pctDeuda > 40) deudaEl.style.color = "var(--egreso)"; else if(pctDeuda > 20) deudaEl.style.color = "var(--deuda)"; else deudaEl.style.color = "var(--ingreso)"; }
 
             let gastoEl = document.getElementById('dash-pct-egresos');
-            if(pctGasto === '∞') { gastoEl.innerText = t('js_gsi'); gastoEl.style.color = "var(--egreso)"; } 
-            else { gastoEl.innerText = `${t('js_rg')} ${pctGasto.toFixed(1)}%`; if(pctGasto > 80) gastoEl.style.color = "var(--egreso)"; else if(pctGasto > 50) gastoEl.style.color = "var(--deuda)"; else gastoEl.style.color = "var(--ingreso)"; }
+            if(pctGasto === '∞') { gastoEl.innerText = "Gastos sin ingresos registrados"; gastoEl.style.color = "var(--egreso)"; } 
+            else { gastoEl.innerText = `Ratio de gasto: ${pctGasto.toFixed(1)}% de tus ingresos`; if(pctGasto > 80) gastoEl.style.color = "var(--egreso)"; else if(pctGasto > 50) gastoEl.style.color = "var(--deuda)"; else gastoEl.style.color = "var(--ingreso)"; }
 
             aplicarFiltrosAvanzados(); renderizarMetasUI(); renderizarActivosUI(); renderizarGraficoPastelCSS(totalIngresos, totalEgresos, totalAhorros);
             generarAnalisisMensual();
@@ -1039,25 +912,25 @@
         }
 
         function abrirModalActivo() { document.getElementById('act-nombre').value = ''; document.getElementById('act-valor').value = ''; document.getElementById('activo-modal').style.display = 'flex'; }
-        function guardarActivo() { const nom = document.getElementById('act-nombre').value.trim(); const cat = document.getElementById('act-categoria').value; const val = parseFloat(document.getElementById('act-valor').value); if(!nom || isNaN(val) || val < 0) { return; } misDatos.datos.activos.push({ nombre: nom, categoria: cat, valor: val, fecha: new Date().toLocaleDateString('es-ES') }); actualizarTodo(); cerrarModal('activo-modal'); }
-        function renderizarActivosUI() { const cont = document.getElementById('contenedor-activos'); cont.innerHTML = ''; if(misDatos.datos.activos.length === 0) { cont.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted);">${t('js_nar')}</p>`; return; } misDatos.datos.activos.forEach((a, i) => { cont.innerHTML += `<div class="activo-card fade-in"><span class="activo-cat-badge">${a.categoria}</span><h4 class="activo-titulo">${a.nombre}</h4><div class="activo-valor">$${a.valor.toLocaleString('en-US', {minimumFractionDigits: 2})}</div><div style="display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); align-items:center;"><span>${idiomaActual==='en'?'Log: ':'Reg: '} ${a.fecha}</span><button class="btn-secondary btn-danger-text" style="padding: 2px 5px; font-size:10px;" onclick="eliminarActivo(${i})">X</button></div></div>`; }); }
+        function guardarActivo() { const nom = document.getElementById('act-nombre').value.trim(); const cat = document.getElementById('act-categoria').value; const val = parseFloat(document.getElementById('act-valor').value); if(!nom || isNaN(val) || val < 0) { mostrarAlerta("Error", "Ingresa un nombre y valor válido."); return; } misDatos.datos.activos.push({ nombre: nom, categoria: cat, valor: val, fecha: new Date().toLocaleDateString('es-ES') }); actualizarTodo(); cerrarModal('activo-modal'); }
+        function renderizarActivosUI() { const cont = document.getElementById('contenedor-activos'); cont.innerHTML = ''; if(misDatos.datos.activos.length === 0) { cont.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted);">No tienes activos registrados.</p>'; return; } misDatos.datos.activos.forEach((a, i) => { cont.innerHTML += `<div class="activo-card fade-in"><span class="activo-cat-badge">${a.categoria}</span><h4 class="activo-titulo">${a.nombre}</h4><div class="activo-valor">$${a.valor.toLocaleString('en-US', {minimumFractionDigits: 2})}</div><div style="display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); align-items:center;"><span>Reg: ${a.fecha}</span><button class="btn-secondary btn-danger-text" style="padding: 2px 5px; font-size:10px;" onclick="eliminarActivo(${i})">Eliminar</button></div></div>`; }); }
         
-        function eliminarActivo(index) { solicitarConfirmacion(idiomaActual==='en'?"Delete asset?":"¿Deseas eliminar este activo?", function() { misDatos.datos.activos.splice(index, 1); actualizarTodo(); }); }
+        function eliminarActivo(index) { solicitarConfirmacion(`¿Deseas eliminar este activo?\n(Esta acción no afecta tu saldo líquido, solo tu cálculo de riqueza real).`, function() { misDatos.datos.activos.splice(index, 1); actualizarTodo(); }); }
 
-        function renderizarDatosPerfil() { const p = misDatos.seguridad.perfil; const nombreMostrar = p.nombres || misDatos.seguridad.usuario; document.getElementById('profile-name-display').textContent = nombreMostrar; document.getElementById('profile-email-display').textContent = p.email || (idiomaActual==='en'?"No email":"Sin correo registrado"); const avatarContainer = document.getElementById('profile-avatar-display'); if(p.avatar) { avatarContainer.innerHTML = `<img src="${p.avatar}">`; } else { avatarContainer.innerHTML = nombreMostrar.charAt(0).toUpperCase(); } }
+        function renderizarDatosPerfil() { const p = misDatos.seguridad.perfil; const nombreMostrar = p.nombres || misDatos.seguridad.usuario; document.getElementById('profile-name-display').textContent = nombreMostrar; document.getElementById('profile-email-display').textContent = p.email || "Sin correo registrado"; const avatarContainer = document.getElementById('profile-avatar-display'); if(p.avatar) { avatarContainer.innerHTML = `<img src="${p.avatar}">`; } else { avatarContainer.innerHTML = nombreMostrar.charAt(0).toUpperCase(); } }
         function abrirModalPerfil() { const p = misDatos.seguridad.perfil; document.getElementById('perfil-usuario-readonly').value = misDatos.seguridad.usuario; document.getElementById('perfil-nombres').value = p.nombres; document.getElementById('perfil-email').value = p.email; document.getElementById('perfil-telefono').value = p.telefono; imagenPerfilActual = p.avatar; actualizarPreviewAvatar(p.avatar); document.getElementById('perfil-modal').style.display = 'flex'; }
         function actualizarPreviewAvatar(base64) { const preview = document.getElementById('edit-avatar-preview'); if(base64) { preview.innerHTML = `<img src="${base64}" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">`; } else { preview.innerHTML = (document.getElementById('perfil-nombres').value.charAt(0) || misDatos.seguridad.usuario.charAt(0)).toUpperCase(); } }
         function guardarPerfil() { misDatos.seguridad.perfil = { nombres: document.getElementById('perfil-nombres').value, email: document.getElementById('perfil-email').value, telefono: document.getElementById('perfil-telefono').value, avatar: imagenPerfilActual }; renderizarDatosPerfil(); guardarEnMemoriaSession(); cerrarModal('perfil-modal'); }
 
         function abrirModalRegistro() { document.getElementById('reg-tipo').value = 'Ingreso'; document.getElementById('reg-subtipo').value = 'General'; document.getElementById('reg-detalle').value = ''; document.getElementById('reg-monto').value = ''; verificarFormularioRegistro(); document.getElementById('registro-modal').style.display = 'flex'; }
-        function verificarFormularioRegistro() { const tipo = document.getElementById('reg-tipo').value; const isAhorro = tipo === 'Ahorro'; const hint = document.getElementById('label-detalle-hint'); document.getElementById('detalle-container').classList.toggle('hidden', isAhorro); document.getElementById('subtipo-ahorro-container').classList.toggle('hidden', !isAhorro); if(tipo === 'Deuda') hint.innerText = idiomaActual==='en'?"(e.g. Loan)":"(Ej. Préstamo a Juan)"; else if(tipo === 'PagoDeuda') hint.innerText = idiomaActual==='en'?"(e.g. Visa payment)":"(Ej. Abono a Visa)"; else hint.innerText = idiomaActual==='en'?"(e.g. Salary, KFC)":"(Ej. Sueldo, Almuerzo)"; if(isAhorro) verificarDestinoAhorro(); }
-        function verificarDestinoAhorro() { const subtipo = document.getElementById('reg-subtipo').value; const selectMetaContainer = document.getElementById('select-meta-container'); selectMetaContainer.classList.toggle('hidden', subtipo !== 'Meta'); if (subtipo === 'Meta') { const selectMeta = document.getElementById('reg-meta-id'); selectMeta.innerHTML = '<option value="">...</option>'; misDatos.datos.metas.forEach((m, index) => { if(m.estado === 'activa' && m.ahorrado < m.costo) { selectMeta.innerHTML += `<option value="${index}">${m.nombre} (${idiomaActual==='en'?'Missing':'Faltan'} $${(m.costo - m.ahorrado).toFixed(2)})</option>`; } }); } }
+        function verificarFormularioRegistro() { const tipo = document.getElementById('reg-tipo').value; const isAhorro = tipo === 'Ahorro'; const hint = document.getElementById('label-detalle-hint'); document.getElementById('detalle-container').classList.toggle('hidden', isAhorro); document.getElementById('subtipo-ahorro-container').classList.toggle('hidden', !isAhorro); if(tipo === 'Deuda') hint.innerText = "(Ej. Préstamo a Juan, Tarjeta Visa)"; else if(tipo === 'PagoDeuda') hint.innerText = "(Ej. Abono a Visa, Pago de préstamo)"; else hint.innerText = "(Ej. Sueldo, Almuerzo)"; if(isAhorro) verificarDestinoAhorro(); }
+        function verificarDestinoAhorro() { const subtipo = document.getElementById('reg-subtipo').value; const selectMetaContainer = document.getElementById('select-meta-container'); selectMetaContainer.classList.toggle('hidden', subtipo !== 'Meta'); if (subtipo === 'Meta') { const selectMeta = document.getElementById('reg-meta-id'); selectMeta.innerHTML = '<option value="">Selecciona una meta...</option>'; misDatos.datos.metas.forEach((m, index) => { if(m.estado === 'activa' && m.ahorrado < m.costo) { selectMeta.innerHTML += `<option value="${index}">${m.nombre} (Faltan $${(m.costo - m.ahorrado).toFixed(2)})</option>`; } }); } }
         
         function guardarRegistro() {
             const tipo = document.getElementById('reg-tipo').value; const monto = parseFloat(document.getElementById('reg-monto').value); let detalle = document.getElementById('reg-detalle').value;
-            if(isNaN(monto) || monto <= 0) return;
-            if(tipo !== 'Ahorro' && !detalle.trim()) return;
-            if(['Egreso', 'Ahorro', 'PagoDeuda'].includes(tipo)) { if(monto > misDatos.datos.saldo_disponible) return; }
+            if(isNaN(monto) || monto <= 0) { mostrarAlerta("Error", "Ingresa un monto numérico válido mayor a cero."); return; }
+            if(tipo !== 'Ahorro' && !detalle.trim()) { mostrarAlerta("Error", "Debes ingresar un detalle para el movimiento."); return; }
+            if(['Egreso', 'Ahorro', 'PagoDeuda'].includes(tipo)) { if(monto > misDatos.datos.saldo_disponible) { mostrarAlerta("Fondos Insuficientes", "No tienes suficiente Liquidez Total (Saldo Disponible) para realizar esta operación."); return; } }
             
             const hoy = new Date(); let metaId = null;
             if (tipo === 'Ingreso') { misDatos.datos.saldo_disponible += monto; } 
@@ -1068,21 +941,22 @@
                 const subtipo = document.getElementById('reg-subtipo').value; 
                 if(subtipo === 'Meta') { 
                     metaId = document.getElementById('reg-meta-id').value; 
-                    if(metaId === "") return; 
+                    if(metaId === "") { mostrarAlerta("Error", "Selecciona la meta destino para tu ahorro."); return; } 
                     let metaSeleccionada = misDatos.datos.metas[metaId]; let faltante = metaSeleccionada.costo - metaSeleccionada.ahorrado;
-                    if (monto > faltante) return;
-                    misDatos.datos.saldo_disponible -= monto; misDatos.datos.ahorros_totales += monto; misDatos.datos.metas[metaId].ahorrado += monto; detalle = (idiomaActual==='en'?'To Goal: ':'Ahorro a Meta: ') + misDatos.datos.metas[metaId].nombre; 
-                } else { misDatos.datos.saldo_disponible -= monto; misDatos.datos.ahorros_totales += monto; detalle = idiomaActual==='en'?'General Savings':'Ahorro General'; } 
+                    if (monto > faltante) { mostrarAlerta("Límite Excedido", `Solo te faltan $${faltante.toLocaleString('en-US', {minimumFractionDigits: 2})} para completar esta meta.`); return; }
+                    misDatos.datos.saldo_disponible -= monto; misDatos.datos.ahorros_totales += monto; misDatos.datos.metas[metaId].ahorrado += monto; detalle = `Ahorro a Meta: ${misDatos.datos.metas[metaId].nombre}`; 
+                } else { misDatos.datos.saldo_disponible -= monto; misDatos.datos.ahorros_totales += monto; detalle = "Ahorro General"; } 
             }
             misDatos.datos.transacciones.push({ fecha: hoy.toLocaleDateString('es-ES'), fechaIso: hoy.toISOString().split('T')[0], tipo: tipo, detalle: detalle, monto: monto, metaId: metaId });
             popularSelectsAvanzados(); actualizarTodo(); cerrarModal('registro-modal');
         }
 
-        function abrirModalMeta() { document.getElementById('meta-nombre').value = ''; document.getElementById('meta-costo').value = ''; document.getElementById('meta-ahorrado').value = ''; document.getElementById('meta-descripcion').value = ''; document.getElementById('meta-imagen').value = ''; document.getElementById('meta-file-name').textContent = t('l_nof'); imagenMetaActual = ""; document.getElementById('meta-modal').style.display = 'flex'; }
+        function abrirModalMeta() { document.getElementById('meta-nombre').value = ''; document.getElementById('meta-costo').value = ''; document.getElementById('meta-ahorrado').value = ''; document.getElementById('meta-descripcion').value = ''; document.getElementById('meta-imagen').value = ''; document.getElementById('meta-file-name').textContent = "Sin imagen"; imagenMetaActual = ""; document.getElementById('meta-modal').style.display = 'flex'; }
         function guardarMeta() { 
             const nom = document.getElementById('meta-nombre').value; const cos = parseFloat(document.getElementById('meta-costo').value); const aho = parseFloat(document.getElementById('meta-ahorrado').value) || 0; const desc = document.getElementById('meta-descripcion').value; 
-            if(!nom || isNaN(cos) || cos<=0) return;
-            if(aho > cos || (aho > 0 && aho > misDatos.datos.saldo_disponible)) return; 
+            if(!nom || isNaN(cos) || cos<=0) { mostrarAlerta("Error", "Ingresa un nombre y un costo total válido."); return; } 
+            if(aho > cos) { mostrarAlerta("Error", "El ahorro inicial no puede ser mayor al costo de la meta."); return; }
+            if(aho > 0 && aho > misDatos.datos.saldo_disponible) { mostrarAlerta("Fondos Insuficientes", "No tienes suficiente Liquidez Total para este ahorro inicial."); return; }
             
             misDatos.datos.metas.push({ nombre: nom, costo: cos, ahorrado: aho, imagen: imagenMetaActual, descripcion: desc, estado: 'activa', fechaCreacion: new Date().toLocaleDateString('es-ES') }); 
             const metaId = misDatos.datos.metas.length - 1;
@@ -1090,41 +964,41 @@
             if(aho > 0) {
                 misDatos.datos.saldo_disponible -= aho;
                 misDatos.datos.ahorros_totales += aho;
-                misDatos.datos.transacciones.push({ fecha: new Date().toLocaleDateString('es-ES'), fechaIso: new Date().toISOString().split('T')[0], tipo: 'Ahorro', detalle: (idiomaActual==='en'?'Initial save to: ':'Ahorro inicial a Meta: ') + nom, monto: aho, metaId: metaId });
+                misDatos.datos.transacciones.push({ fecha: new Date().toLocaleDateString('es-ES'), fechaIso: new Date().toISOString().split('T')[0], tipo: 'Ahorro', detalle: `Ahorro inicial a Meta: ${nom}`, monto: aho, metaId: metaId });
             }
 
             popularSelectsAvanzados(); actualizarTodo(); cerrarModal('meta-modal'); 
         }
-        function renderizarMetasUI() { const contActivas = document.getElementById('contenedor-metas-activas'); const contArchivadas = document.getElementById('contenedor-metas-archivadas'); contActivas.innerHTML = ''; contArchivadas.innerHTML = ''; let hayActivas = false, hayArchivadas = false; misDatos.datos.metas.forEach((m, i) => { if(m.estado === 'eliminada') return; const porcentaje = Math.min((m.ahorrado / m.costo) * 100, 100); const esCumplida = porcentaje >= 100; const esArchivada = m.estado === 'archivada'; const imgSrc = m.imagen ? m.imagen : 'data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23eee%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%2F%3E%3C%2Fsvg%3E'; const badge = esArchivada ? `<div class="badge-archivada">${idiomaActual==='en'?'ARCHIVED':'ARCHIVADA'}</div>` : (esCumplida ? `<div class="badge-cumplida">${t('m_lis')}</div>` : ''); const html = `<div class="meta-card-compact ${esCumplida ? 'cumplida' : ''} ${esArchivada ? 'archivada' : ''}" onclick="abrirDetalleMeta(${i})">${badge}<div class="meta-img-box"><img src="${imgSrc}"></div><div class="meta-info"><div class="meta-title" title="${m.nombre}">${m.nombre}</div><div class="barra-progreso-mini"><div class="progreso-fill-mini" style="width: ${porcentaje}%;"></div></div><div style="font-size:11px; color:var(--text-muted); display:flex; justify-content:space-between;"><span>$${m.ahorrado.toLocaleString('en-US')}</span><span style="font-weight:bold;">${porcentaje.toFixed(0)}%</span></div></div></div>`; if(esArchivada) { contArchivadas.innerHTML += html; hayArchivadas = true; } else { contActivas.innerHTML += html; hayActivas = true; } }); if(!hayActivas) contActivas.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); margin-top:20px;">${t('js_nma')}</p>`; if(!hayArchivadas) contArchivadas.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); margin-top:20px;">${t('js_nmh')}</p>`; }
-        function abrirDetalleMeta(index) { indiceMetaActualVista = index; const m = misDatos.datos.metas[index]; const porcentaje = Math.min((m.ahorrado / m.costo) * 100, 100); document.getElementById('md-info-principal').classList.remove('hidden'); document.getElementById('md-historial-seccion').classList.add('hidden'); document.getElementById('md-imagen').src = m.imagen ? m.imagen : 'data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23eee%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%2F%3E%3C%2Fsvg%3E'; document.getElementById('md-titulo').innerText = m.nombre; document.getElementById('md-fecha-creacion').innerText = (idiomaActual==='en'?"Created: ":"Creado el: ") + (m.fechaCreacion || '---'); document.getElementById('md-desc').innerText = m.descripcion || "..."; document.getElementById('md-ahorrado').innerText = "$" + m.ahorrado.toLocaleString('en-US', {minimumFractionDigits: 2}); document.getElementById('md-costo').innerText = "$" + m.costo.toLocaleString('en-US', {minimumFractionDigits: 2}); document.getElementById('md-barra').style.width = porcentaje + "%"; const badge = document.getElementById('md-badge'); const btnArchivar = document.getElementById('btn-archivar-meta'); badge.classList.add('hidden'); btnArchivar.classList.add('hidden'); if (m.estado === 'archivada') { document.getElementById('md-porcentaje').innerText = idiomaActual==='en'?"ARCHIVED":"META ARCHIVADA"; document.getElementById('md-porcentaje').style.color = "var(--text-muted)"; document.getElementById('md-barra').style.background = "var(--text-muted)"; } else if (porcentaje >= 100) { document.getElementById('md-porcentaje').innerText = "100%"; document.getElementById('md-porcentaje').style.color = "var(--ingreso)"; document.getElementById('md-barra').style.background = "var(--ingreso)"; badge.classList.remove('hidden'); btnArchivar.classList.remove('hidden'); } else { document.getElementById('md-porcentaje').innerText = porcentaje.toFixed(1) + "%"; document.getElementById('md-porcentaje').style.color = "var(--text-muted)"; document.getElementById('md-barra').style.background = "var(--primary)"; } document.getElementById('meta-detalle-modal').style.display = 'flex'; }
+        function renderizarMetasUI() { const contActivas = document.getElementById('contenedor-metas-activas'); const contArchivadas = document.getElementById('contenedor-metas-archivadas'); contActivas.innerHTML = ''; contArchivadas.innerHTML = ''; let hayActivas = false, hayArchivadas = false; misDatos.datos.metas.forEach((m, i) => { if(m.estado === 'eliminada') return; const porcentaje = Math.min((m.ahorrado / m.costo) * 100, 100); const esCumplida = porcentaje >= 100; const esArchivada = m.estado === 'archivada'; const imgSrc = m.imagen ? m.imagen : 'data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23eee%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%2F%3E%3C%2Fsvg%3E'; const badge = esArchivada ? '<div class="badge-archivada">ARCHIVADA</div>' : (esCumplida ? '<div class="badge-cumplida">¡LISTA!</div>' : ''); const html = `<div class="meta-card-compact ${esCumplida ? 'cumplida' : ''} ${esArchivada ? 'archivada' : ''}" onclick="abrirDetalleMeta(${i})">${badge}<div class="meta-img-box"><img src="${imgSrc}"></div><div class="meta-info"><div class="meta-title" title="${m.nombre}">${m.nombre}</div><div class="barra-progreso-mini"><div class="progreso-fill-mini" style="width: ${porcentaje}%;"></div></div><div style="font-size:11px; color:var(--text-muted); display:flex; justify-content:space-between;"><span>$${m.ahorrado.toLocaleString('en-US')}</span><span style="font-weight:bold;">${porcentaje.toFixed(0)}%</span></div></div></div>`; if(esArchivada) { contArchivadas.innerHTML += html; hayArchivadas = true; } else { contActivas.innerHTML += html; hayActivas = true; } }); if(!hayActivas) contActivas.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); margin-top:20px;">No tienes objetivos activos.</p>'; if(!hayArchivadas) contArchivadas.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); margin-top:20px;">Aún no tienes objetivos archivados.</p>'; }
+        function abrirDetalleMeta(index) { indiceMetaActualVista = index; const m = misDatos.datos.metas[index]; const porcentaje = Math.min((m.ahorrado / m.costo) * 100, 100); document.getElementById('md-info-principal').classList.remove('hidden'); document.getElementById('md-historial-seccion').classList.add('hidden'); document.getElementById('md-imagen').src = m.imagen ? m.imagen : 'data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23eee%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%2F%3E%3C%2Fsvg%3E'; document.getElementById('md-titulo').innerText = m.nombre; document.getElementById('md-fecha-creacion').innerText = "Creado el: " + (m.fechaCreacion || 'Desconocida'); document.getElementById('md-desc').innerText = m.descripcion || "Sin descripción proporcionada."; document.getElementById('md-ahorrado').innerText = "$" + m.ahorrado.toLocaleString('en-US', {minimumFractionDigits: 2}); document.getElementById('md-costo').innerText = "$" + m.costo.toLocaleString('en-US', {minimumFractionDigits: 2}); document.getElementById('md-barra').style.width = porcentaje + "%"; const badge = document.getElementById('md-badge'); const btnArchivar = document.getElementById('btn-archivar-meta'); badge.classList.add('hidden'); btnArchivar.classList.add('hidden'); if (m.estado === 'archivada') { document.getElementById('md-porcentaje').innerText = "META ARCHIVADA EN HISTORIAL"; document.getElementById('md-porcentaje').style.color = "var(--text-muted)"; document.getElementById('md-barra').style.background = "var(--text-muted)"; } else if (porcentaje >= 100) { document.getElementById('md-porcentaje').innerText = "100% - ¡OBJETIVO CUMPLIDO!"; document.getElementById('md-porcentaje').style.color = "var(--ingreso)"; document.getElementById('md-barra').style.background = "var(--ingreso)"; badge.classList.remove('hidden'); btnArchivar.classList.remove('hidden'); } else { document.getElementById('md-porcentaje').innerText = porcentaje.toFixed(1) + "% COMPLETADO"; document.getElementById('md-porcentaje').style.color = "var(--text-muted)"; document.getElementById('md-barra').style.background = "var(--primary)"; } document.getElementById('meta-detalle-modal').style.display = 'flex'; }
         
         function archivarMetaActual() { 
             const m = misDatos.datos.metas[indiceMetaActualVista];
             solicitarConfirmacion(
-                idiomaActual==='en'?`Move goal to history? You cannot add more savings.`:`Se moverá al historial la meta "${m.nombre}" y no podrás añadirle más ahorros.`,
+                `Se moverá al historial la meta "${m.nombre}" y no podrás añadirle más ahorros.`,
                 function() {
                     m.estado = 'archivada'; actualizarTodo(); cerrarModal('meta-detalle-modal'); cambiarSubPestanaMetas('archivadas', document.querySelectorAll('.sub-tab-btn')[1]); 
                     setTimeout(() => {
                         solicitarConfirmacion(
-                            idiomaActual==='en'?`Register as Fixed Asset?`:`¡Meta archivada!\n\n¿Adquiriste este bien en la vida real y deseas registrarlo como un nuevo Activo Fijo?`,
+                            `¡Meta archivada!\n\n¿Adquiriste este bien en la vida real y deseas registrar "${m.nombre}" como un nuevo Activo Fijo?\n\n(Esto vaciará los $${m.ahorrado.toLocaleString('en-US')} de tus ahorros y lo convertirá en un Activo, equilibrando tu contabilidad).`,
                             function() { 
                                 misDatos.datos.activos.push({ nombre: m.nombre, categoria: 'Otro', valor: m.ahorrado, fecha: new Date().toLocaleDateString('es-ES') }); 
                                 misDatos.datos.ahorros_totales -= m.ahorrado;
-                                misDatos.datos.transacciones.push({ fecha: new Date().toLocaleDateString('es-ES'), fechaIso: new Date().toISOString().split('T')[0], tipo: 'UsoAhorro', detalle: (idiomaActual==='en'?'Buy asset: ':'Compra de activo con fondos de meta: ') + m.nombre, monto: m.ahorrado, metaId: null });
-                                actualizarTodo(); 
-                            }, idiomaActual==='en'?"Yes, convert":"Sí, convertir", idiomaActual==='en'?"No":"No, solo archivar", false 
+                                misDatos.datos.transacciones.push({ fecha: new Date().toLocaleDateString('es-ES'), fechaIso: new Date().toISOString().split('T')[0], tipo: 'UsoAhorro', detalle: `Compra de activo con fondos de meta: ${m.nombre}`, monto: m.ahorrado, metaId: null });
+                                actualizarTodo(); mostrarAlerta("Permuta de Activo Exitosa", "El dinero ha salido de tus ahorros y el bien ha sido añadido exitosamente a tu lista de Activos."); 
+                            }, "Sí, convertir", "No, solo archivar", false 
                         );
                     }, 400);
-                }, idiomaActual==='en'?"Archive":"Archivar", idiomaActual==='en'?"Cancel":"Cancelar", true 
+                }, "Archivar", "Cancelar", true 
             );
         }
         
         function eliminarMetaActual() { 
             const m = misDatos.datos.metas[indiceMetaActualVista];
             solicitarConfirmacion(
-                idiomaActual==='en'?`Delete goal? Funds will return to Liquidity.`:`¿Deseas eliminar definitivamente la meta "${m.nombre}"?\n\nEl dinero que tenías ahorrado regresará a tu Liquidez Total.`,
+                `¿Deseas eliminar definitivamente la meta "${m.nombre}"?\n\nEl dinero que tenías ahorrado ($${m.ahorrado.toLocaleString('en-US', {minimumFractionDigits: 2})}) regresará a tu Liquidez Total (Saldo Disponible).`,
                 function() {
-                    const montoReverso = m.ahorrado; misDatos.datos.saldo_disponible += montoReverso; misDatos.datos.ahorros_totales -= montoReverso; if (montoReverso > 0) { const hoy = new Date(); misDatos.datos.transacciones.push({ fecha: hoy.toLocaleDateString('es-ES'), fechaIso: hoy.toISOString().split('T')[0], tipo: 'Reverso', detalle: (idiomaActual==='en'?'Goal deleted: ':'Reverso de fondos: Meta eliminada ') + m.nombre, monto: montoReverso, metaId: null }); } m.ahorrado = 0; m.estado = 'eliminada'; popularSelectsAvanzados(); actualizarTodo(); cerrarModal('meta-detalle-modal'); 
+                    const montoReverso = m.ahorrado; misDatos.datos.saldo_disponible += montoReverso; misDatos.datos.ahorros_totales -= montoReverso; if (montoReverso > 0) { const hoy = new Date(); misDatos.datos.transacciones.push({ fecha: hoy.toLocaleDateString('es-ES'), fechaIso: hoy.toISOString().split('T')[0], tipo: 'Reverso', detalle: `Reverso de fondos: Meta eliminada (${m.nombre})`, monto: montoReverso, metaId: null }); } m.ahorrado = 0; m.estado = 'eliminada'; popularSelectsAvanzados(); actualizarTodo(); cerrarModal('meta-detalle-modal'); mostrarAlerta("Meta Eliminada", "La meta ha sido eliminada y los fondos han retornado.");
                 }
             );
         }
@@ -1135,15 +1009,15 @@
                 info.classList.add('hidden'); hist.classList.remove('hidden'); 
                 const container = document.getElementById('md-historial-container'); container.innerHTML = '';
                 const txMeta = misDatos.datos.transacciones.filter(tx => tx.tipo === 'Ahorro' && tx.metaId == indiceMetaActualVista); 
-                if(txMeta.length === 0) { container.innerHTML = `<p style="color:gray; padding:10px 0; text-align:center; font-size:13px;">${idiomaActual==='en'?'No records.':'No hay depósitos registrados.'}</p>`; } 
+                if(txMeta.length === 0) { container.innerHTML = '<p style="color:gray; padding:10px 0; text-align:center; font-size:13px;">No hay depósitos registrados.</p>'; } 
                 else { txMeta.reverse().forEach(tx => { container.innerHTML += `<div class="historial-item"><span class="historial-fecha">${tx.fecha}</span><div class="fin-align" style="color: var(--primary); font-weight: bold;">+${fmtDinero(tx.monto)}</div></div>`; }); } 
             } else { hist.classList.add('hidden'); info.classList.remove('hidden'); }
         }
 
         function popularSelectsAvanzados() {
-            const selectAhorro = document.getElementById('filtro-ahorro-select'); selectAhorro.innerHTML = `<option value="Todos">${t('op_tod')}</option><option value="General">${t('mo_rg_g')}</option>`;
-            if(misDatos && misDatos.datos.metas) { misDatos.datos.metas.forEach((m, index) => { if(m.estado === 'activa' || m.estado === 'archivada') selectAhorro.innerHTML += `<option value="${index}">Meta: ${m.nombre}</option>`; else if(m.estado === 'eliminada') selectAhorro.innerHTML += `<option value="${index}">Meta: ${m.nombre} (X)</option>`; }); }
-            const selectDeuda = document.getElementById('filtro-deuda-select'); selectDeuda.innerHTML = `<option value="Todas">${t('op_tod')}</option>`;
+            const selectAhorro = document.getElementById('filtro-ahorro-select'); selectAhorro.innerHTML = '<option value="Todos">Todos los ahorros</option><option value="General">Ahorro General</option>';
+            if(misDatos && misDatos.datos.metas) { misDatos.datos.metas.forEach((m, index) => { if(m.estado === 'activa' || m.estado === 'archivada') selectAhorro.innerHTML += `<option value="${index}">Meta: ${m.nombre}</option>`; else if(m.estado === 'eliminada') selectAhorro.innerHTML += `<option value="${index}">Meta: ${m.nombre} (Eliminada)</option>`; }); }
+            const selectDeuda = document.getElementById('filtro-deuda-select'); selectDeuda.innerHTML = '<option value="Todas">Todas las deudas</option>';
             if(misDatos && misDatos.datos.transacciones) { const deudas = misDatos.datos.transacciones.filter(tx => tx.tipo === 'Deuda'); const etiquetas = [...new Set(deudas.map(tx => tx.detalle.trim()))]; etiquetas.forEach(et => { selectDeuda.innerHTML += `<option value="${et}">${et}</option>`; }); }
         }
         function verificarSubfiltrosMovimientos() {
@@ -1161,16 +1035,16 @@
                 else { filtrados = filtrados.filter(tx => tx.tipo === tipo); if (tipo === 'Ahorro') { const subAho = document.getElementById('filtro-ahorro-select').value; if(subAho === 'General') { filtrados = filtrados.filter(tx => tx.metaId === null || tx.metaId === undefined); } else if (subAho !== 'Todos') { filtrados = filtrados.filter(tx => tx.metaId == subAho); } } }
             }
             const tbody = document.getElementById('tabla-movimientos'); tbody.innerHTML = '';
-            if(filtrados.length === 0) { tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding: 20px;">${t('js_nm')}</td></tr>`; return; }
+            if(filtrados.length === 0) { tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding: 20px;">No se encontraron movimientos.</td></tr>'; return; }
             filtrados.reverse().forEach(tx => { 
                 let color = tx.tipo === 'Egreso' || tx.tipo === 'PagoDeuda' ? 'var(--egreso)' : (tx.tipo === 'Deuda' ? 'var(--deuda)' : 'var(--ingreso)'); 
-                let nombreTipo = tx.tipo === 'Ahorro' && tx.metaId != null ? 'Ahorro Meta' : tx.tipo; 
-                if(tx.tipo === 'Deuda') nombreTipo = 'Deuda'; if(tx.tipo === 'PagoDeuda') nombreTipo = 'Pago Deuda'; if(tx.tipo === 'Ahorro') color = 'var(--primary)'; if(tx.tipo === 'Reverso') color = 'var(--ingreso)'; if(tx.tipo === 'UsoAhorro') { color = 'var(--text-muted)'; nombreTipo = 'Uso Ahorros'; }
+                let nombreTipo = tx.tipo === 'Ahorro' && tx.metaId != null ? 'Ahorro a Meta' : tx.tipo; 
+                if(tx.tipo === 'Deuda') nombreTipo = 'Nueva Deuda'; if(tx.tipo === 'PagoDeuda') nombreTipo = 'Pago Deuda'; if(tx.tipo === 'Ahorro') color = 'var(--primary)'; if(tx.tipo === 'Reverso') color = 'var(--ingreso)'; if(tx.tipo === 'UsoAhorro') { color = 'var(--text-muted)'; nombreTipo = 'Uso de Ahorros'; }
                 tbody.innerHTML += `<tr><td>${tx.fecha}</td><td style="color:${color}; font-weight:600;">${nombreTipo}</td><td class="col-detalle">${tx.detalle}</td><td class="fin-align" style="font-weight:600;">${fmtDinero(tx.monto)}</td><td class="fin-align" style="color: var(--text-muted); font-weight:600;">${fmtDinero(tx.saldo_historico || 0)}</td></tr>`; 
             });
         }
         function limpiarFiltrosAvanzados() { document.getElementById('filtro-inicio').value = ''; document.getElementById('filtro-fin').value = ''; document.getElementById('filtro-tipo').value = 'Todos'; document.getElementById('filtro-ahorro-select').value = 'Todos'; document.getElementById('filtro-deuda-select').value = 'Todas'; verificarSubfiltrosMovimientos(); aplicarFiltrosAvanzados(); }
-        function descargarRespaldo() { misDatos.seguridad.ultima_sesion = new Date().toISOString(); const fecha = new Date().toISOString().split('T')[0]; const blob = new Blob([JSON.stringify(misDatos, null, 2)], { type: 'application/json' }); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `Boveda_${misDatos.seguridad.usuario}_${fecha}.json`; a.click(); document.getElementById('last-session-trigger').textContent = (idiomaActual==='en'?"Last session: ":"Última sesión: ") + formatearFechaElegante(misDatos.seguridad.ultima_sesion); guardarEnMemoriaSession(); const btnIcon = document.querySelector('.btn-respaldo svg'); if(btnIcon){ btnIcon.style.transform = 'scale(0.8)'; setTimeout(() => btnIcon.style.transform = 'scale(1)', 200);} }
+        function descargarRespaldo() { misDatos.seguridad.ultima_sesion = new Date().toISOString(); const fecha = new Date().toISOString().split('T')[0]; const blob = new Blob([JSON.stringify(misDatos, null, 2)], { type: 'application/json' }); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `Boveda_${misDatos.seguridad.usuario}_${fecha}.json`; a.click(); document.getElementById('last-session-trigger').textContent = "Última sesión: " + formatearFechaElegante(misDatos.seguridad.ultima_sesion); guardarEnMemoriaSession(); const btnIcon = document.querySelector('.btn-respaldo svg'); if(btnIcon){ btnIcon.style.transform = 'scale(0.8)'; setTimeout(() => btnIcon.style.transform = 'scale(1)', 200);} }
         function exportarCSV() { const fechaHoy = new Date().toLocaleDateString('es-ES'); let csv = `"HISTORIAL FINANCIERO - Generado el ${fechaHoy}"\n`; csv += "Fecha,Tipo de Movimiento,Detalle / Descripción,Monto ($), Saldo Post-Movimiento ($)\n"; misDatos.datos.transacciones.forEach(tx => { csv += `"${tx.fecha}","${tx.tipo}","${tx.detalle}","${tx.monto.toFixed(2)}","${(tx.saldo_historico || 0).toFixed(2)}"\n`; }); const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' }); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `Historial_Financiero_${new Date().toISOString().split('T')[0]}.csv`; a.click(); }
     </script>
 </body>
