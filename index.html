@@ -112,11 +112,9 @@
         .leyenda-color-txt { display: flex; align-items: center; }
         .color-dot { width: 12px; height: 12px; border-radius: 50%; margin-right: 8px; }
 
-        /* NUEVO: CAJA DE ANÁLISIS */
         .analisis-box { background: rgba(24, 119, 242, 0.05); border-left: 4px solid var(--primary); padding: 15px; margin-top: 20px; border-radius: 8px; font-size: 13px; color: var(--text-main); line-height: 1.5; width: 100%; max-width: 500px; text-align: left; }
         .analisis-box strong { color: var(--primary); }
 
-        /* TABLAS CENTRADAS UNIVERSALES */
         .table-container { background: var(--bg-card); border-radius: var(--radius); border: 1px solid var(--border); overflow-x: auto; -webkit-overflow-scrolling: touch;}
         table { width: 100%; border-collapse: collapse; min-width: 600px; }
         th { background: rgba(0,0,0,0.02); font-size: 0.85em; text-transform: uppercase; color: var(--text-muted); text-align: center !important; padding: 14px 16px; border-bottom: 1px solid var(--border); }
@@ -368,7 +366,7 @@
                 </div>
             </div>
             
-            <div id="detalle-inline-container"><h3 id="detalle-inline-titulo">Detalles</h3><div class="table-container"><table><thead><tr><th>Fecha</th><th>Detalle</th><th>Tipo</th><th>Monto</th><th>Saldo</th></tr></thead><tbody id="tabla-detalle-inline"></tbody></table></div></div>
+            <div id="detalle-inline-container"><h3 id="detalle-inline-titulo">Detalles</h3><div class="table-container"><table><thead><tr><th>Fecha</th><th class="col-detalle">Detalle</th><th>Tipo</th><th class="fin-align">Monto</th><th class="fin-align">Saldo</th></tr></thead><tbody id="tabla-detalle-inline"></tbody></table></div></div>
 
             <div class="banner-patrimonio-clickable fade-in" onclick="clickBannerPatrimonio()">
                 <div>
@@ -425,7 +423,7 @@
                 </div>
             </div>
             <div class="table-container">
-                <table><thead><tr><th>Fecha</th><th>Tipo</th><th>Detalle</th><th>Monto</th><th>Saldo Acumulado</th></tr></thead><tbody id="tabla-movimientos"></tbody></table>
+                <table><thead><tr><th>Fecha</th><th>Tipo</th><th class="col-detalle">Detalle</th><th class="fin-align">Monto</th><th class="fin-align">Saldo Acumulado</th></tr></thead><tbody id="tabla-movimientos"></tbody></table>
             </div>
         </div>
 
@@ -609,9 +607,11 @@
             const iconContainer = document.getElementById('eye-icon-container');
             if(input.type === 'password') {
                 input.type = 'text';
+                /* Ojo Abierto (Sin raya) */
                 iconContainer.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>';
             } else {
                 input.type = 'password';
+                /* Ojo Tachado (Con raya) */
                 iconContainer.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" /></svg>';
             }
         }
@@ -749,7 +749,8 @@
                 const iconContainer = document.getElementById('eye-icon-container');
                 pwdInput.value = '';
                 pwdInput.type = 'password';
-                iconContainer.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>';
+                /* Restaurar el ojo tachado al salir */
+                iconContainer.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" /></svg>';
                 
                 document.getElementById('login-file').value = ''; 
                 document.getElementById('login-file-name').textContent = 'Ningún archivo...'; 
@@ -983,7 +984,7 @@
                             function() { 
                                 misDatos.datos.activos.push({ nombre: m.nombre, categoria: 'Otro', valor: m.ahorrado, fecha: new Date().toLocaleDateString('es-ES') }); 
                                 misDatos.datos.ahorros_totales -= m.ahorrado;
-                                misDatos.datos.transacciones.push({ fecha: new Date().toLocaleDateString('es-ES'), fechaIso: new DatetoISOString().split('T')[0], tipo: 'UsoAhorro', detalle: `Compra de activo con fondos de meta: ${m.nombre}`, monto: m.ahorrado, metaId: null });
+                                misDatos.datos.transacciones.push({ fecha: new Date().toLocaleDateString('es-ES'), fechaIso: new Date().toISOString().split('T')[0], tipo: 'UsoAhorro', detalle: `Compra de activo con fondos de meta: ${m.nombre}`, monto: m.ahorrado, metaId: null });
                                 actualizarTodo(); mostrarAlerta("Permuta de Activo Exitosa", "El dinero ha salido de tus ahorros y el bien ha sido añadido exitosamente a tu lista de Activos."); 
                             }, "Sí, convertir", "No, solo archivar", false 
                         );
